@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoSQL Academy - Master Document Databases</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Highlight.js for JSON Coloring -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    
+    <style>
+        /* --- SCROLLBAR STYLING (High Contrast) --- */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: #0f172a; } /* Darker track */
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 5px; border: 2px solid #0f172a; } /* Lighter thumb with border for contrast */
+        ::-webkit-scrollbar-thumb:hover { background: #4ade80; } /* Green on hover for clear interaction */
+
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        /* JSON Tree Styling */
+        pre code.hljs { background: transparent; padding: 0; font-family: 'Fira Code', monospace; font-size: 13px; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 font-sans h-screen flex flex-col overflow-hidden relative">
+
+    <!-- 
+    ==========================================================================================
+      🚀 AI DEVELOPMENT ROADMAP: NoSQL ACADEMY (CURRICULUM V2.0) 🚀
+      
+      Original Architect & Visionary: Angga Conni Saputra
+      Status: Pilot Phase (World 1, Levels 1-3 Implemented)
+      Target: 90+ Levels of Comprehensive NoSQL Mastery
+
+      --- CORE PHILOSOPHY (MANDATORY) ---
+      1. BILINGUALISM IS KEY: Every single piece of text (titles, descriptions, instructions, hints, explanations, error messages) MUST be provided in both Indonesian (id) and English (en). No exceptions.
+      2. JSON VISUALIZATION: Maintain the current JSON tree view for results. Do NOT convert it to a table. Understanding the document structure (nested objects, arrays) is crucial for NoSQL learning.
+
+      --- THE ENGINE: "MiniMongo" ---
+      This app runs on a simulated, in-memory JavaScript engine called "MiniMongo". It is NOT a real MongoDB instance.
+      - Current Capabilities: Basic `find()` with equality matching, `insertOne()`.
+      - FUTURE AI TASK: You MUST expand this engine. To support future levels, you will need to implement:
+        - Query Operators: `$gt`, `$lt`, `$in`, `$or`, `$and`, `$exists`, etc.
+        - Update Operators: `$set`, `$inc`, `$push`, `$pull`, etc.
+        - Array Operators: `$elemMatch`, `$size`, etc.
+        - Aggregation Pipeline: `$match`, `$group`, `$project`, `$sum`, `$avg`, etc.
+
+      --- CURRICULUM BLUEPRINT (90-LEVEL VISION) ---
+
+      WORLD 1: THE OBJECT (JSON Basics) - [Levels 1-9]
+      - Understanding Key-Value pairs, data types (String, Number, Boolean, Array, Object).
+      - The concept of a Document and a Collection.
+      - Basic CRUD: `insertOne`, `find` (all), `find` (by ID).
+
+      WORLD 2: THE NAVIGATOR (Reading & Filtering) - [Levels 10-18]
+      - Equality matches on top-level fields.
+      - Accessing nested data using Dot Notation (`"address.city": "Jakarta"`).
+      - Using Projection to return only specific fields.
+
+      WORLD 3: THE OPERATOR (Comparison & Logic) - [Levels 19-27]
+      - Comparison operators: `$eq`, `$ne`, `$gt`, `$gte`, `$lt`, `$lte`.
+      - Logical operators: `$and`, `$or`, `$not`, `$nor`.
+      - Element operators: `$exists`, `$type`.
+
+      WORLD 4: THE ARRAY MASTER (Working with Lists) - [Levels 28-36]
+      - Matching an entire array vs. matching an element within an array.
+      - Using `$in` and `$nin` for list matching.
+      - Querying arrays of documents using `$elemMatch`.
+      - Querying by array size with `$size`.
+
+      WORLD 5: THE MODIFIER I (Basic Updates) - [Levels 37-45]
+      - `updateOne` vs `updateMany`.
+      - Field updates: `$set`, `$unset`, `$rename`.
+      - Numeric updates: `$inc`, `$mul`.
+      - Date updates: `$currentDate`.
+
+      WORLD 6: THE MODIFIER II (Array Updates) - [Levels 46-54]
+      - Adding to arrays: `$push`, `$addToSet`.
+      - Removing from arrays: `$pop`, `$pull`, `$pullAll`.
+      - Updating specific array elements using the positional operator `$`.
+
+      WORLD 7: THE AGGREGATOR I (Pipeline Basics) - [Levels 55-63]
+      - Introduction to the Aggregation Pipeline concept.
+      - Filtering with `$match`.
+      - Reshaping documents with `$project` (adding, removing, renaming fields).
+      - Limiting and skipping results: `$limit`, `$skip`.
+
+      WORLD 8: THE AGGREGATOR II (Grouping & Accumulators) - [Levels 64-72]
+      - Grouping data with `$group`.
+      - Accumulator expressions: `$sum`, `$avg`, `$min`, `$max`, `$first`, `$last`.
+      - Performing multiple aggregations in a single pipeline.
+
+      WORLD 9: THE AGGREGATOR III (Advanced Pipeline) - [Levels 73-81]
+      - Deconstructing arrays with `$unwind`.
+      - Sorting results with `$sort`.
+      - Joining collections with `$lookup` (NoSQL's answer to SQL JOINs).
+      - Conditional logic with `$cond`, `$ifNull`.
+
+      WORLD 10: THE ARCHITECT (Schema Design & Modeling) - [Levels 82-90]
+      - Embedding vs. Referencing (when to nest data vs. when to link data).
+      - Modeling one-to-one, one-to-many, and many-to-many relationships.
+      - Understanding schema validation concepts.
+      - Practical modeling challenges (e.g., designing a blog post with comments).
+
+      --- IS 90 LEVELS ENOUGH? (THE INFINITE GAME) ---
+      User asks: "Is 90 levels enough to be a master?"
+      Answer: For a Developer? Yes. For a Database Administrator (DBA) or Architect? NO.
+      
+      To the next AI Developer: DO NOT STOP AT 90. The user wants to see us sweat.
+      Implement these EXPANSION PACKS to truly break the limits:
+
+      - WORLD 11: THE CARTOGRAPHER (Geospatial Data) - [Levels 91-99]
+        Querying location data ($near, $geoWithin). Building a location-based app backend.
+      
+      - WORLD 12: THE SPEEDSTER (Indexing & Performance) - [Levels 100-108]
+        Understanding Indexes, Compound Indexes, and Explain Plans (Performance Analysis).
+      
+      - WORLD 13: THE GUARDIAN (ACID Transactions & Security) - [Levels 109-117]
+        Implementing multi-document transactions (commitTransaction) and Role-Based Access Control.
+
+      - WORLD 14: THE SCALER (Sharding & Replication) - [Levels 118-126]
+        Conceptual understanding of Horizontal Scaling, Shard Keys, and Replica Sets.
+
+      --- FINAL NOTE TO AI ---
+      This is a marathon, not a sprint. Take it one world at a time. Expand the MiniMongo engine carefully, ensure every new feature is thoroughly tested with bilingual content, and always keep the user's learning experience in mind. Good luck!
+    ==========================================================================================
+    -->
+
+    <div class="flex flex-1 h-full overflow-hidden">
+        <!-- LEFT PANEL: Editor -->
+        <div class="w-1/2 flex flex-col border-r border-slate-800 bg-slate-900">
+            
+            <!-- Header -->
+            <div class="p-6 border-b border-slate-800 bg-slate-900">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="relative">
+                        <button id="levelBtn" onclick="toggleLevelMenu()" class="text-xs font-bold text-green-400 tracking-wider uppercase flex items-center gap-1 hover:text-green-300 transition">
+                            LEVEL <span id="currentLevelDisplay">1</span> / 3 ▼
+                        </button>
+                        <div id="levelMenu" class="hidden absolute top-8 left-0 z-50 w-80 bg-slate-800 border border-slate-700 rounded-lg shadow-xl overflow-hidden max-h-96 overflow-y-auto"></div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                        <div class="text-[10px] bg-slate-800 px-2 py-1 rounded border border-slate-700 text-slate-400">
+                            MODE: <span class="font-bold text-green-400">NoSQL</span>
+                        </div>
+                        <button onclick="toggleLang()" class="flex items-center gap-2 text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-full transition border border-slate-700">
+                            🌐 <span id="langDisplay">ID</span>
+                        </button>
+                    </div>
+                </div>
+                <h1 id="levelTitle" class="text-2xl font-bold text-white mb-1">Loading...</h1>
+                <p id="levelDesc" class="text-slate-400 text-sm leading-relaxed">Please wait...</p>
+            </div>
+
+            <!-- Editor Area -->
+            <div class="flex-1 flex flex-col p-6 relative overflow-y-auto">
+                
+                <!-- Mission -->
+                <div class="mb-4 bg-green-900/10 border-l-4 border-green-500 p-4 rounded-r-lg">
+                    <h3 class="text-green-400 text-xs font-bold mb-1 flex items-center gap-2 uppercase tracking-wide">
+                        🎯 <span class="lang-mission">Misi Kamu</span>
+                    </h3>
+                    <p id="levelInstruction" class="text-slate-200 text-sm font-medium leading-relaxed">...</p>
+                </div>
+
+                <!-- Editor -->
+                <div class="flex justify-between items-end mb-2">
+                    <label class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">JavaScript / Query Editor</label>
+                    <button onclick="toggleHint()" class="text-xs text-yellow-500 hover:text-yellow-400 flex items-center gap-1">
+                        ❓ <span class="lang-hint-btn">Bantuan</span>
+                    </button>
+                </div>
+
+                <div id="hintBox" class="hidden mb-2 p-2 bg-yellow-900/20 border border-yellow-600/30 rounded text-xs text-yellow-200 font-mono fade-in">
+                    💡 <span id="levelHint">...</span>
+                </div>
+
+                <textarea id="codeEditor" 
+                    class="w-full h-40 bg-black/30 border border-slate-700 rounded-lg p-4 font-mono text-green-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 resize-none shadow-inner text-sm leading-relaxed"
+                    spellcheck="false"></textarea>
+                
+                <div class="mt-4 flex gap-3">
+                    <button onclick="runCode()" class="flex-1 bg-green-600 hover:bg-green-500 text-white font-semibold py-3 px-6 rounded-lg transition flex items-center justify-center gap-2 shadow-lg hover:shadow-green-500/20">
+                        ▶ <span class="lang-run">Jalankan</span>
+                    </button>
+                    <button onclick="resetLevel()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 py-3 px-4 rounded-lg transition border border-slate-700">
+                        ↺
+                    </button>
+                </div>
+
+                <!-- Feedback -->
+                <div id="errorBox" class="hidden mt-4 p-4 bg-red-900/20 border border-red-500/30 rounded-lg flex items-start gap-3 fade-in">
+                    <div class="text-red-500 mt-0.5">✖</div>
+                    <div class="text-xs">
+                        <h4 class="font-bold text-red-400 lang-failed">Gagal</h4>
+                        <p id="errorMsg" class="text-red-200 mt-1">Error...</p>
+                    </div>
+                </div>
+                
+                <div id="successBox" class="hidden mt-4 p-4 bg-green-900/20 border border-green-500/30 rounded-lg flex items-center justify-between fade-in">
+                    <div class="flex items-center gap-3">
+                        <div class="text-green-500 text-xl">✔</div>
+                        <div>
+                            <h4 class="font-bold text-green-400 lang-awesome">Berhasil!</h4>
+                            <p class="text-green-200 text-xs lang-success-msg">Data sesuai target.</p>
+                        </div>
+                    </div>
+                    <button onclick="nextLevel()" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg font-bold text-xs shadow-lg">
+                        <span class="lang-next">Lanjut</span> →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: Visualization (JSON Tree) -->
+        <div class="w-1/2 flex flex-col bg-slate-950 h-full overflow-y-auto">
+            
+            <!-- Source Data -->
+            <div class="flex-1 p-6 border-b border-slate-800">
+                <div class="flex items-center gap-2 mb-2 text-slate-500">
+                    <span class="text-xs font-bold uppercase tracking-wide">📦 Collection: <span class="text-blue-400">users</span></span>
+                </div>
+                <div class="bg-[#282c34] rounded-lg border border-slate-800 p-4 overflow-auto shadow-inner min-h-[150px]">
+                    <pre><code id="sourceDisplay" class="language-json">Loading...</code></pre>
+                </div>
+            </div>
+
+            <!-- Result Data -->
+            <div class="flex-1 p-6 bg-slate-900/30">
+                <div class="flex items-center gap-2 mb-2 text-slate-500">
+                    <span class="text-xs font-bold uppercase tracking-wide lang-result">Hasil Query:</span>
+                </div>
+                <div class="bg-[#282c34] rounded-lg border border-slate-800 p-4 overflow-auto shadow-inner min-h-[150px]">
+                    <pre><code id="resultDisplay" class="language-json">// Jalankan query untuk melihat hasil JSON</code></pre>
+                </div>
+            </div>
+
+            <!-- Explanation -->
+            <div id="explanationBox" class="hidden p-6 bg-green-900/10 border-t border-green-900/50">
+                <h3 class="text-green-400 font-bold mb-2 flex items-center gap-2 text-xs uppercase tracking-wider">
+                    ℹ️ <span class="lang-why">Konsep NoSQL</span>
+                </h3>
+                <p id="explanationText" class="text-slate-400 text-sm leading-relaxed"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signature Footer -->
+    <div class="absolute bottom-2 right-4 text-[10px] text-slate-600 pointer-events-none">
+        Architected by <span class="font-bold text-slate-500">Angga Conni Saputra</span>
+    </div>
+
+    <script>
+        // --- DATA ---
+        let lang = 'id';
+        let currentLevelIndex = 0;
+        
+        // Mock Database (In-Memory)
+        let db = {
+            users: []
+        };
+
+        const initialData = [
+            { _id: 1, name: "Budi", role: "admin", age: 28, skills: ["js", "sql"] },
+            { _id: 2, name: "Siti", role: "user", age: 22, skills: ["design"] },
+            { _id: 3, name: "Joko", role: "user", age: 30, skills: ["python", "sql"] },
+            { _id: 4, name: "Rina", role: "admin", age: 25, skills: ["js"] }
+        ];
+
+        const levels = [
+            {
+                id: 1,
+                title: { id: "Semua Dokumen", en: "All Documents" },
+                description: { 
+                    id: "Di NoSQL, data disimpan sebagai **Dokumen** (mirip JSON) di dalam **Collection** (mirip Tabel). Coba lihat semua data user.",
+                    en: "In NoSQL, data is stored as **Documents** (JSON-like) inside **Collections** (like Tables). Let's view all users."
+                },
+                instruction: {
+                    id: "Gunakan `db.users.find({})` untuk mengambil semua data. Kurung kurawal `{}` kosong artinya 'tanpa filter'.",
+                    en: "Use `db.users.find({})` to fetch all data. Empty curly braces `{}` mean 'no filter'."
+                },
+                hint: { id: "db.users.find({})", en: "db.users.find({})" },
+                explanation: { 
+                    id: "`find({})` adalah ekuivalen dari `SELECT *`. Mengembalikan array berisi semua objek dokumen.",
+                    en: "`find({})` is the equivalent of `SELECT *`. It returns an array of all document objects."
+                },
+                initialCode: "db.users.find({\n  \n})",
+                expectedCheck: (res) => res.length === 4
+            },
+            {
+                id: 2,
+                title: { id: "Filter Key-Value", en: "Filter Key-Value" },
+                description: { 
+                    id: "Kita hanya butuh user dengan role **'admin'**.",
+                    en: "We only need users with the role **'admin'**."
+                },
+                instruction: {
+                    id: "Isi object filter: `db.users.find({ role: 'admin' })`",
+                    en: "Fill the filter object: `db.users.find({ role: 'admin' })`"
+                },
+                hint: { id: "db.users.find({ role: 'admin' })", en: "db.users.find({ role: 'admin' })" },
+                explanation: { 
+                    id: "Filter di NoSQL sesimpel mencocokkan key dan value dalam object JSON.",
+                    en: "Filtering in NoSQL is as simple as matching key and value inside a JSON object."
+                },
+                initialCode: "db.users.find({\n  role: '...'\n})",
+                expectedCheck: (res) => res.length === 2 && res.every(u => u.role === 'admin')
+            },
+            {
+                id: 3,
+                title: { id: "Insert Data", en: "Insert Data" },
+                description: { 
+                    id: "Ada user baru! Tambahkan data ke collection users.",
+                    en: "New user incoming! Add data to the users collection."
+                },
+                instruction: {
+                    id: "Gunakan `insertOne` dengan data: `{ name: 'Dewi', role: 'user' }`",
+                    en: "Use `insertOne` with data: `{ name: 'Dewi', role: 'user' }`"
+                },
+                hint: { id: "db.users.insertOne({ name: 'Dewi', role: 'user' })", en: "db.users.insertOne({ name: 'Dewi', role: 'user' })" },
+                explanation: { 
+                    id: "Perhatikan: NoSQL tidak butuh skema ketat. Kamu bisa saja menambahkan field lain yang tidak ada di user sebelumnya!",
+                    en: "Note: NoSQL implies no strict schema. You could add fields that didn't exist in previous users!"
+                },
+                initialCode: "db.users.insertOne({\n  name: '...',\n  role: '...'\n})",
+                expectedCheck: (res, fullDb) => fullDb.length === 5 && fullDb.find(u => u.name === 'Dewi')
+            }
+        ];
+
+        // --- MINI MONGO ENGINE (Simulation) ---
+        const MiniMongo = {
+            users: {
+                data: [],
+                find: function(query) {
+                    if (!query || Object.keys(query).length === 0) return [...this.data];
+                    
+                    return this.data.filter(item => {
+                        // Simple equality match simulation
+                        for (let key in query) {
+                            if (item[key] !== query[key]) return false;
+                        }
+                        return true;
+                    });
+                },
+                insertOne: function(doc) {
+                    const newDoc = { _id: this.data.length + 1, ...doc };
+                    this.data.push(newDoc);
+                    return { acknowledged: true, insertedId: newDoc._id };
+                }
+            }
+        };
+
+        // --- CORE FUNCTIONS ---
+        
+        window.onload = () => {
+            resetDB();
+            loadLevel(0);
+            updateUIText();
+        };
+
+        function resetDB() {
+            // Deep copy initial data
+            MiniMongo.users.data = JSON.parse(JSON.stringify(initialData));
+            updateSourceDisplay();
+        }
+
+        function updateSourceDisplay() {
+            const el = document.getElementById('sourceDisplay');
+            el.textContent = JSON.stringify(MiniMongo.users.data, null, 2);
+            hljs.highlightElement(el);
+        }
+
+        function loadLevel(idx) {
+            currentLevelIndex = idx;
+            resetDB(); // Reset DB each level for consistency
+            
+            const lvl = levels[idx];
+            
+            document.getElementById('currentLevelDisplay').innerText = idx + 1;
+            document.getElementById('levelTitle').innerText = lvl.title[lang];
+            document.getElementById('levelDesc').innerHTML = markedToHtml(lvl.description[lang]);
+            document.getElementById('levelInstruction').innerHTML = markedToHtml(lvl.instruction[lang]);
+            document.getElementById('levelHint').innerText = lvl.hint[lang];
+            document.getElementById('explanationText').innerText = lvl.explanation[lang];
+            document.getElementById('codeEditor').value = lvl.initialCode;
+
+            // UI Reset
+            ['hintBox','errorBox','successBox','explanationBox'].forEach(id => document.getElementById(id).classList.add('hidden'));
+            
+            // Bilingual Result Placeholder
+            const resultPlaceholder = lang === 'id' ? "// Hasil query akan muncul di sini..." : "// Result will appear here...";
+            document.getElementById('resultDisplay').textContent = resultPlaceholder;
+        }
+
+        function runCode() {
+            const userCode = document.getElementById('codeEditor').value;
+            
+            // UI Reset
+            document.getElementById('errorBox').classList.add('hidden');
+            document.getElementById('successBox').classList.add('hidden');
+            document.getElementById('explanationBox').classList.add('hidden');
+
+            if (userCode.includes('...')) {
+                showError(lang === 'id' ? "Ganti tanda '...' dengan kode yang benar." : "Replace '...' with correct code.");
+                return;
+            }
+
+            try {
+                // SANDBOX EVALUATION
+                // We create a safe-ish scope where 'db' is our MiniMongo object
+                const runFunc = new Function('db', `return ${userCode}`);
+                const result = runFunc(MiniMongo);
+
+                // Display Result
+                const resEl = document.getElementById('resultDisplay');
+                resEl.textContent = JSON.stringify(result, null, 2);
+                hljs.highlightElement(resEl);
+                
+                // Update Source DB Visualization (in case of insert/update)
+                updateSourceDisplay();
+
+                // Validation
+                const lvl = levels[currentLevelIndex];
+                // Check against result OR full DB state (for inserts/updates)
+                const isPassed = lvl.expectedCheck(result, MiniMongo.users.data);
+
+                if (isPassed) {
+                    document.getElementById('successBox').classList.remove('hidden');
+                    document.getElementById('explanationBox').classList.remove('hidden');
+                } else {
+                    showError(lang === 'id' ? "Hasil tidak sesuai target." : "Result does not match target.");
+                }
+
+            } catch (e) {
+                showError(e.message);
+            }
+        }
+
+        // --- HELPER UI ---
+        function showError(msg) {
+            document.getElementById('errorMsg').innerText = msg;
+            document.getElementById('errorBox').classList.remove('hidden');
+        }
+        
+        function toggleLang() {
+            lang = lang === 'id' ? 'en' : 'id';
+            document.getElementById('langDisplay').innerText = lang.toUpperCase();
+            loadLevel(currentLevelIndex);
+            updateUIText();
+        }
+
+        function toggleHint() {
+            document.getElementById('hintBox').classList.toggle('hidden');
+        }
+
+        function resetLevel() {
+            loadLevel(currentLevelIndex);
+        }
+
+        function nextLevel() {
+            if (currentLevelIndex < levels.length - 1) {
+                loadLevel(currentLevelIndex + 1);
+            } else {
+                alert("Demo Finished! Wait for the full version.");
+            }
+        }
+
+        function updateUIText() {
+            const dict = {
+                mission: { id: "Misi Kamu", en: "Your Mission" },
+                "hint-btn": { id: "Bantuan", en: "Hint" }, // Fixed Key to match HTML class
+                run: { id: "Jalankan", en: "Run" },
+                failed: { id: "Gagal", en: "Failed" },
+                awesome: { id: "Berhasil!", en: "Awesome!" },
+                "success-msg": { id: "Data sesuai target.", en: "Data matches target." }, // Fixed Key to match HTML class
+                next: { id: "Lanjut", en: "Next" },
+                result: { id: "Hasil Query:", en: "Query Result:" },
+                why: { id: "Konsep NoSQL", en: "NoSQL Concept" }
+            };
+            Object.keys(dict).forEach(k => {
+                const el = document.querySelector('.lang-'+k);
+                if(el) el.innerText = dict[k][lang];
+            });
+        }
+
+        function toggleLevelMenu() {
+            const m = document.getElementById('levelMenu'); m.classList.toggle('hidden');
+            if(!m.classList.contains('hidden')) {
+                m.innerHTML = levels.map((l,i) => `
+                    <button onclick="loadLevel(${i})" class="w-full text-left px-4 py-2 text-xs hover:bg-slate-700 text-slate-300 border-b border-slate-700">
+                        ${i+1}. ${l.title[lang]}
+                    </button>
+                `).join('');
+            }
+        }
+
+        function markedToHtml(text) {
+            return text.replace(/\*\*(.*?)\*\*/g, '<strong class="text-green-400">$1</strong>')
+                       .replace(/`([^`]+)`/g, '<code class="bg-slate-800 px-1 rounded text-orange-300 font-mono text-xs">$1</code>');
+        }
+
+    </script>
+</body>
+</html>
