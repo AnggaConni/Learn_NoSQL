@@ -3,147 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoSQL Academy - Master Document Databases</title>
-    <!-- Tailwind CSS -->
+    <title>NoSQL Academy - Master Document Databases (90 Levels)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Highlight.js for JSON Coloring -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     
     <style>
-        /* --- SCROLLBAR STYLING (High Contrast) --- */
         ::-webkit-scrollbar { width: 10px; height: 10px; }
-        ::-webkit-scrollbar-track { background: #0f172a; } /* Darker track */
-        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 5px; border: 2px solid #0f172a; } /* Lighter thumb with border for contrast */
-        ::-webkit-scrollbar-thumb:hover { background: #4ade80; } /* Green on hover for clear interaction */
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 5px; border: 2px solid #0f172a; }
+        ::-webkit-scrollbar-thumb:hover { background: #4ade80; }
 
         .fade-in { animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        /* JSON Tree Styling */
         pre code.hljs { background: transparent; padding: 0; font-family: 'Fira Code', monospace; font-size: 13px; }
+        
+        @keyframes confetti { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+        .confetti { position: fixed; width: 10px; height: 10px; animation: confetti 3s linear infinite; z-index: 9999; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-200 font-sans h-screen flex flex-col overflow-hidden relative">
 
-    <!-- 
-    ==========================================================================================
-      🚀 AI DEVELOPMENT ROADMAP: NoSQL ACADEMY (CURRICULUM V2.0) 🚀
-      
-      Original Architect & Visionary: Angga Conni Saputra
-      Status: Pilot Phase (World 1, Levels 1-3 Implemented)
-      Target: 90+ Levels of Comprehensive NoSQL Mastery
-
-      --- CORE PHILOSOPHY (MANDATORY) ---
-      1. BILINGUALISM IS KEY: Every single piece of text (titles, descriptions, instructions, hints, explanations, error messages) MUST be provided in both Indonesian (id) and English (en). No exceptions.
-      2. JSON VISUALIZATION: Maintain the current JSON tree view for results. Do NOT convert it to a table. Understanding the document structure (nested objects, arrays) is crucial for NoSQL learning.
-
-      --- THE ENGINE: "MiniMongo" ---
-      This app runs on a simulated, in-memory JavaScript engine called "MiniMongo". It is NOT a real MongoDB instance.
-      - Current Capabilities: Basic `find()` with equality matching, `insertOne()`.
-      - FUTURE AI TASK: You MUST expand this engine. To support future levels, you will need to implement:
-        - Query Operators: `$gt`, `$lt`, `$in`, `$or`, `$and`, `$exists`, etc.
-        - Update Operators: `$set`, `$inc`, `$push`, `$pull`, etc.
-        - Array Operators: `$elemMatch`, `$size`, etc.
-        - Aggregation Pipeline: `$match`, `$group`, `$project`, `$sum`, `$avg`, etc.
-
-      --- CURRICULUM BLUEPRINT (90-LEVEL VISION) ---
-
-      WORLD 1: THE OBJECT (JSON Basics) - [Levels 1-9]
-      - Understanding Key-Value pairs, data types (String, Number, Boolean, Array, Object).
-      - The concept of a Document and a Collection.
-      - Basic CRUD: `insertOne`, `find` (all), `find` (by ID).
-
-      WORLD 2: THE NAVIGATOR (Reading & Filtering) - [Levels 10-18]
-      - Equality matches on top-level fields.
-      - Accessing nested data using Dot Notation (`"address.city": "Jakarta"`).
-      - Using Projection to return only specific fields.
-
-      WORLD 3: THE OPERATOR (Comparison & Logic) - [Levels 19-27]
-      - Comparison operators: `$eq`, `$ne`, `$gt`, `$gte`, `$lt`, `$lte`.
-      - Logical operators: `$and`, `$or`, `$not`, `$nor`.
-      - Element operators: `$exists`, `$type`.
-
-      WORLD 4: THE ARRAY MASTER (Working with Lists) - [Levels 28-36]
-      - Matching an entire array vs. matching an element within an array.
-      - Using `$in` and `$nin` for list matching.
-      - Querying arrays of documents using `$elemMatch`.
-      - Querying by array size with `$size`.
-
-      WORLD 5: THE MODIFIER I (Basic Updates) - [Levels 37-45]
-      - `updateOne` vs `updateMany`.
-      - Field updates: `$set`, `$unset`, `$rename`.
-      - Numeric updates: `$inc`, `$mul`.
-      - Date updates: `$currentDate`.
-
-      WORLD 6: THE MODIFIER II (Array Updates) - [Levels 46-54]
-      - Adding to arrays: `$push`, `$addToSet`.
-      - Removing from arrays: `$pop`, `$pull`, `$pullAll`.
-      - Updating specific array elements using the positional operator `$`.
-
-      WORLD 7: THE AGGREGATOR I (Pipeline Basics) - [Levels 55-63]
-      - Introduction to the Aggregation Pipeline concept.
-      - Filtering with `$match`.
-      - Reshaping documents with `$project` (adding, removing, renaming fields).
-      - Limiting and skipping results: `$limit`, `$skip`.
-
-      WORLD 8: THE AGGREGATOR II (Grouping & Accumulators) - [Levels 64-72]
-      - Grouping data with `$group`.
-      - Accumulator expressions: `$sum`, `$avg`, `$min`, `$max`, `$first`, `$last`.
-      - Performing multiple aggregations in a single pipeline.
-
-      WORLD 9: THE AGGREGATOR III (Advanced Pipeline) - [Levels 73-81]
-      - Deconstructing arrays with `$unwind`.
-      - Sorting results with `$sort`.
-      - Joining collections with `$lookup` (NoSQL's answer to SQL JOINs).
-      - Conditional logic with `$cond`, `$ifNull`.
-
-      WORLD 10: THE ARCHITECT (Schema Design & Modeling) - [Levels 82-90]
-      - Embedding vs. Referencing (when to nest data vs. when to link data).
-      - Modeling one-to-one, one-to-many, and many-to-many relationships.
-      - Understanding schema validation concepts.
-      - Practical modeling challenges (e.g., designing a blog post with comments).
-
-      --- IS 90 LEVELS ENOUGH? (THE INFINITE GAME) ---
-      User asks: "Is 90 levels enough to be a master?"
-      Answer: For a Developer? Yes. For a Database Administrator (DBA) or Architect? NO.
-      
-      To the next AI Developer: DO NOT STOP AT 90. The user wants to see us sweat.
-      Implement these EXPANSION PACKS to truly break the limits:
-
-      - WORLD 11: THE CARTOGRAPHER (Geospatial Data) - [Levels 91-99]
-        Querying location data ($near, $geoWithin). Building a location-based app backend.
-      
-      - WORLD 12: THE SPEEDSTER (Indexing & Performance) - [Levels 100-108]
-        Understanding Indexes, Compound Indexes, and Explain Plans (Performance Analysis).
-      
-      - WORLD 13: THE GUARDIAN (ACID Transactions & Security) - [Levels 109-117]
-        Implementing multi-document transactions (commitTransaction) and Role-Based Access Control.
-
-      - WORLD 14: THE SCALER (Sharding & Replication) - [Levels 118-126]
-        Conceptual understanding of Horizontal Scaling, Shard Keys, and Replica Sets.
-
-      --- FINAL NOTE TO AI ---
-      This is a marathon, not a sprint. Take it one world at a time. Expand the MiniMongo engine carefully, ensure every new feature is thoroughly tested with bilingual content, and always keep the user's learning experience in mind. Good luck!
-    ==========================================================================================
-    -->
-
     <div class="flex flex-1 h-full overflow-hidden">
-        <!-- LEFT PANEL: Editor -->
+        <!-- LEFT PANEL -->
         <div class="w-1/2 flex flex-col border-r border-slate-800 bg-slate-900">
-            
-            <!-- Header -->
             <div class="p-6 border-b border-slate-800 bg-slate-900">
                 <div class="flex items-center justify-between mb-2">
                     <div class="relative">
                         <button id="levelBtn" onclick="toggleLevelMenu()" class="text-xs font-bold text-green-400 tracking-wider uppercase flex items-center gap-1 hover:text-green-300 transition">
-                            LEVEL <span id="currentLevelDisplay">1</span> / 3 ▼
+                            LEVEL <span id="currentLevelDisplay">1</span> / 90 ▼
                         </button>
-                        <div id="levelMenu" class="hidden absolute top-8 left-0 z-50 w-80 bg-slate-800 border border-slate-700 rounded-lg shadow-xl overflow-hidden max-h-96 overflow-y-auto"></div>
+                        <div id="levelMenu" class="hidden absolute top-8 left-0 z-50 w-96 bg-slate-800 border border-slate-700 rounded-lg shadow-xl overflow-hidden max-h-96 overflow-y-auto"></div>
                     </div>
                     
                     <div class="flex items-center gap-3">
                         <div class="text-[10px] bg-slate-800 px-2 py-1 rounded border border-slate-700 text-slate-400">
-                            MODE: <span class="font-bold text-green-400">NoSQL</span>
+                            <span id="worldDisplay">WORLD 1: THE OBJECT</span>
                         </div>
                         <button onclick="toggleLang()" class="flex items-center gap-2 text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-full transition border border-slate-700">
                             🌐 <span id="langDisplay">ID</span>
@@ -154,10 +49,7 @@
                 <p id="levelDesc" class="text-slate-400 text-sm leading-relaxed">Please wait...</p>
             </div>
 
-            <!-- Editor Area -->
             <div class="flex-1 flex flex-col p-6 relative overflow-y-auto">
-                
-                <!-- Mission -->
                 <div class="mb-4 bg-green-900/10 border-l-4 border-green-500 p-4 rounded-r-lg">
                     <h3 class="text-green-400 text-xs font-bold mb-1 flex items-center gap-2 uppercase tracking-wide">
                         🎯 <span class="lang-mission">Misi Kamu</span>
@@ -165,7 +57,6 @@
                     <p id="levelInstruction" class="text-slate-200 text-sm font-medium leading-relaxed">...</p>
                 </div>
 
-                <!-- Editor -->
                 <div class="flex justify-between items-end mb-2">
                     <label class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">JavaScript / Query Editor</label>
                     <button onclick="toggleHint()" class="text-xs text-yellow-500 hover:text-yellow-400 flex items-center gap-1">
@@ -190,7 +81,6 @@
                     </button>
                 </div>
 
-                <!-- Feedback -->
                 <div id="errorBox" class="hidden mt-4 p-4 bg-red-900/20 border border-red-500/30 rounded-lg flex items-start gap-3 fade-in">
                     <div class="text-red-500 mt-0.5">✖</div>
                     <div class="text-xs">
@@ -214,20 +104,17 @@
             </div>
         </div>
 
-        <!-- RIGHT PANEL: Visualization (JSON Tree) -->
+        <!-- RIGHT PANEL -->
         <div class="w-1/2 flex flex-col bg-slate-950 h-full overflow-y-auto">
-            
-            <!-- Source Data -->
             <div class="flex-1 p-6 border-b border-slate-800">
                 <div class="flex items-center gap-2 mb-2 text-slate-500">
-                    <span class="text-xs font-bold uppercase tracking-wide">📦 Collection: <span class="text-blue-400">users</span></span>
+                    <span class="text-xs font-bold uppercase tracking-wide">📦 Collection: <span class="text-blue-400" id="collectionName">users</span></span>
                 </div>
                 <div class="bg-[#282c34] rounded-lg border border-slate-800 p-4 overflow-auto shadow-inner min-h-[150px]">
                     <pre><code id="sourceDisplay" class="language-json">Loading...</code></pre>
                 </div>
             </div>
 
-            <!-- Result Data -->
             <div class="flex-1 p-6 bg-slate-900/30">
                 <div class="flex items-center gap-2 mb-2 text-slate-500">
                     <span class="text-xs font-bold uppercase tracking-wide lang-result">Hasil Query:</span>
@@ -237,7 +124,6 @@
                 </div>
             </div>
 
-            <!-- Explanation -->
             <div id="explanationBox" class="hidden p-6 bg-green-900/10 border-t border-green-900/50">
                 <h3 class="text-green-400 font-bold mb-2 flex items-center gap-2 text-xs uppercase tracking-wider">
                     ℹ️ <span class="lang-why">Konsep NoSQL</span>
@@ -247,31 +133,485 @@
         </div>
     </div>
 
-    <!-- Signature Footer -->
+    <!-- Congratulations Modal -->
+    <div id="congratsModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[100] backdrop-blur-sm">
+        <div class="bg-slate-900 border-2 border-green-500 rounded-2xl p-12 max-w-2xl text-center shadow-2xl transform scale-95 hover:scale-100 transition-transform">
+            <div class="text-8xl mb-6">🎉</div>
+            <h1 class="text-5xl font-bold text-green-400 mb-4">
+                <span class="lang-congrats-title">SELAMAT!</span>
+            </h1>
+            <p class="text-2xl text-slate-300 mb-6">
+                <span class="lang-congrats-subtitle">Kamu telah menyelesaikan semua 90 level!</span>
+            </p>
+            <div class="bg-slate-800 rounded-lg p-6 mb-8">
+                <p class="text-slate-400 leading-relaxed mb-4">
+                    <span class="lang-congrats-msg">Kamu sekarang telah menguasai dasar-dasar NoSQL dari CRUD sederhana hingga Aggregation Pipeline dan Schema Design. Ini adalah pencapaian luar biasa!</span>
+                </p>
+                <div class="flex items-center justify-center gap-8 text-sm text-slate-500">
+                    <div>
+                        <div class="text-3xl font-bold text-green-400">90</div>
+                        <div class="lang-congrats-levels">Level Selesai</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-blue-400">10</div>
+                        <div class="lang-congrats-worlds">World Ditaklukkan</div>
+                    </div>
+                </div>
+            </div>
+            <button onclick="restartAcademy()" class="bg-green-600 hover:bg-green-500 text-white font-bold px-8 py-4 rounded-lg text-lg shadow-lg">
+                <span class="lang-congrats-restart">Mulai Dari Awal</span>
+            </button>
+        </div>
+    </div>
+
     <div class="absolute bottom-2 right-4 text-[10px] text-slate-600 pointer-events-none">
         Architected by <span class="font-bold text-slate-500">Angga Conni Saputra</span>
     </div>
 
     <script>
-        // --- DATA ---
         let lang = 'id';
         let currentLevelIndex = 0;
         
-        // Mock Database (In-Memory)
-        let db = {
-            users: []
+        // Enhanced MiniMongo Engine
+        const MiniMongo = {
+            users: { data: [] },
+            products: { data: [] },
+            orders: { data: [] },
+            blogs: { data: [] },
+            
+            // Collection methods
+            createCollection(name, data) {
+                this[name] = {
+                    data: JSON.parse(JSON.stringify(data)),
+                    
+                    find(query = {}, projection = null) {
+                        let results = this.filterData(query);
+                        if (projection) {
+                            results = results.map(doc => this.applyProjection(doc, projection));
+                        }
+                        return results;
+                    },
+                    
+                    findOne(query = {}) {
+                        return this.filterData(query)[0] || null;
+                    },
+                    
+                    filterData(query) {
+                        if (Object.keys(query).length === 0) return [...this.data];
+                        
+                        return this.data.filter(doc => this.matchQuery(doc, query));
+                    },
+                    
+                    matchQuery(doc, query) {
+                        for (let key in query) {
+                            const value = query[key];
+                            
+                            // Handle operators
+                            if (key.startsWith('$')) {
+                                if (!this.handleLogicalOperator(doc, key, value)) return false;
+                            } else if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+                                // Field operator
+                                if (!this.handleFieldOperator(doc, key, value)) return false;
+                            } else {
+                                // Simple equality
+                                const docValue = this.getNestedValue(doc, key);
+                                if (!this.compareValues(docValue, value)) return false;
+                            }
+                        }
+                        return true;
+                    },
+                    
+                    handleLogicalOperator(doc, operator, value) {
+                        switch(operator) {
+                            case '$or':
+                                return value.some(q => this.matchQuery(doc, q));
+                            case '$and':
+                                return value.every(q => this.matchQuery(doc, q));
+                            case '$nor':
+                                return !value.some(q => this.matchQuery(doc, q));
+                            case '$not':
+                                return !this.matchQuery(doc, value);
+                            default:
+                                return true;
+                        }
+                    },
+                    
+                    handleFieldOperator(doc, field, operators) {
+                        const docValue = this.getNestedValue(doc, field);
+                        
+                        for (let op in operators) {
+                            const opValue = operators[op];
+                            
+                            switch(op) {
+                                case '$eq':
+                                    if (!this.compareValues(docValue, opValue)) return false;
+                                    break;
+                                case '$ne':
+                                    if (this.compareValues(docValue, opValue)) return false;
+                                    break;
+                                case '$gt':
+                                    if (!(docValue > opValue)) return false;
+                                    break;
+                                case '$gte':
+                                    if (!(docValue >= opValue)) return false;
+                                    break;
+                                case '$lt':
+                                    if (!(docValue < opValue)) return false;
+                                    break;
+                                case '$lte':
+                                    if (!(docValue <= opValue)) return false;
+                                    break;
+                                case '$in':
+                                    if (!opValue.includes(docValue)) return false;
+                                    break;
+                                case '$nin':
+                                    if (opValue.includes(docValue)) return false;
+                                    break;
+                                case '$exists':
+                                    const exists = docValue !== undefined;
+                                    if (exists !== opValue) return false;
+                                    break;
+                                case '$type':
+                                    if (typeof docValue !== opValue) return false;
+                                    break;
+                                case '$regex':
+                                    if (!new RegExp(opValue).test(docValue)) return false;
+                                    break;
+                                case '$elemMatch':
+                                    if (!Array.isArray(docValue)) return false;
+                                    if (!docValue.some(item => this.matchQuery(item, opValue))) return false;
+                                    break;
+                                case '$size':
+                                    if (!Array.isArray(docValue) || docValue.length !== opValue) return false;
+                                    break;
+                                case '$all':
+                                    if (!Array.isArray(docValue)) return false;
+                                    if (!opValue.every(val => docValue.includes(val))) return false;
+                                    break;
+                            }
+                        }
+                        return true;
+                    },
+                    
+                    compareValues(docValue, queryValue) {
+                        if (Array.isArray(docValue) && !Array.isArray(queryValue)) {
+                            return docValue.includes(queryValue);
+                        }
+                        return JSON.stringify(docValue) === JSON.stringify(queryValue);
+                    },
+                    
+                    getNestedValue(obj, path) {
+                        return path.split('.').reduce((current, key) => 
+                            current?.[key], obj);
+                    },
+                    
+                    applyProjection(doc, projection) {
+                        const result = {};
+                        const isInclusion = Object.values(projection).some(v => v === 1);
+                        
+                        if (isInclusion) {
+                            for (let key in projection) {
+                                if (projection[key] === 1) {
+                                    result[key] = doc[key];
+                                }
+                            }
+                            if (!projection._id && doc._id !== undefined) result._id = doc._id;
+                        } else {
+                            Object.assign(result, doc);
+                            for (let key in projection) {
+                                if (projection[key] === 0) {
+                                    delete result[key];
+                                }
+                            }
+                        }
+                        return result;
+                    },
+                    
+                    insertOne(doc) {
+                        const newDoc = { _id: this.data.length + 1, ...doc };
+                        this.data.push(newDoc);
+                        return { acknowledged: true, insertedId: newDoc._id };
+                    },
+                    
+                    insertMany(docs) {
+                        const inserted = [];
+                        docs.forEach(doc => {
+                            const result = this.insertOne(doc);
+                            inserted.push(result.insertedId);
+                        });
+                        return { acknowledged: true, insertedIds: inserted };
+                    },
+                    
+                    updateOne(query, update) {
+                        const doc = this.findOne(query);
+                        if (!doc) return { matchedCount: 0, modifiedCount: 0 };
+                        
+                        this.applyUpdate(doc, update);
+                        return { matchedCount: 1, modifiedCount: 1 };
+                    },
+                    
+                    updateMany(query, update) {
+                        const docs = this.find(query);
+                        docs.forEach(doc => this.applyUpdate(doc, update));
+                        return { matchedCount: docs.length, modifiedCount: docs.length };
+                    },
+                    
+                    applyUpdate(doc, update) {
+                        for (let op in update) {
+                            const fields = update[op];
+                            
+                            switch(op) {
+                                case '$set':
+                                    Object.assign(doc, fields);
+                                    break;
+                                case '$unset':
+                                    for (let field in fields) {
+                                        delete doc[field];
+                                    }
+                                    break;
+                                case '$inc':
+                                    for (let field in fields) {
+                                        doc[field] = (doc[field] || 0) + fields[field];
+                                    }
+                                    break;
+                                case '$mul':
+                                    for (let field in fields) {
+                                        doc[field] = (doc[field] || 0) * fields[field];
+                                    }
+                                    break;
+                                case '$rename':
+                                    for (let oldName in fields) {
+                                        const newName = fields[oldName];
+                                        doc[newName] = doc[oldName];
+                                        delete doc[oldName];
+                                    }
+                                    break;
+                                case '$push':
+                                    for (let field in fields) {
+                                        if (!Array.isArray(doc[field])) doc[field] = [];
+                                        doc[field].push(fields[field]);
+                                    }
+                                    break;
+                                case '$addToSet':
+                                    for (let field in fields) {
+                                        if (!Array.isArray(doc[field])) doc[field] = [];
+                                        if (!doc[field].includes(fields[field])) {
+                                            doc[field].push(fields[field]);
+                                        }
+                                    }
+                                    break;
+                                case '$pop':
+                                    for (let field in fields) {
+                                        if (Array.isArray(doc[field])) {
+                                            fields[field] === 1 ? doc[field].pop() : doc[field].shift();
+                                        }
+                                    }
+                                    break;
+                                case '$pull':
+                                    for (let field in fields) {
+                                        if (Array.isArray(doc[field])) {
+                                            doc[field] = doc[field].filter(item => item !== fields[field]);
+                                        }
+                                    }
+                                    break;
+                            }
+                        }
+                    },
+                    
+                    deleteOne(query) {
+                        const index = this.data.findIndex(doc => this.matchQuery(doc, query));
+                        if (index === -1) return { deletedCount: 0 };
+                        this.data.splice(index, 1);
+                        return { deletedCount: 1 };
+                    },
+                    
+                    deleteMany(query) {
+                        const initialLength = this.data.length;
+                        this.data = this.data.filter(doc => !this.matchQuery(doc, query));
+                        return { deletedCount: initialLength - this.data.length };
+                    },
+                    
+                    aggregate(pipeline) {
+                        let results = [...this.data];
+                        
+                        for (let stage of pipeline) {
+                            const stageType = Object.keys(stage)[0];
+                            const stageValue = stage[stageType];
+                            
+                            switch(stageType) {
+                                case '$match':
+                                    results = results.filter(doc => this.matchQuery(doc, stageValue));
+                                    break;
+                                    
+                                case '$project':
+                                    results = results.map(doc => {
+                                        const projected = {};
+                                        for (let field in stageValue) {
+                                            if (stageValue[field] === 1) {
+                                                projected[field] = doc[field];
+                                            } else if (stageValue[field] === 0) {
+                                                continue;
+                                            } else {
+                                                projected[field] = this.evaluateExpression(doc, stageValue[field]);
+                                            }
+                                        }
+                                        return projected;
+                                    });
+                                    break;
+                                    
+                                case '$group':
+                                    results = this.performGrouping(results, stageValue);
+                                    break;
+                                    
+                                case '$sort':
+                                    results = this.performSort(results, stageValue);
+                                    break;
+                                    
+                                case '$limit':
+                                    results = results.slice(0, stageValue);
+                                    break;
+                                    
+                                case '$skip':
+                                    results = results.slice(stageValue);
+                                    break;
+                                    
+                                case '$unwind':
+                                    const field = stageValue.startsWith('$') ? stageValue.slice(1) : stageValue;
+                                    const unwound = [];
+                                    results.forEach(doc => {
+                                        const arr = doc[field];
+                                        if (Array.isArray(arr)) {
+                                            arr.forEach(item => {
+                                                unwound.push({ ...doc, [field]: item });
+                                            });
+                                        }
+                                    });
+                                    results = unwound;
+                                    break;
+                            }
+                        }
+                        
+                        return results;
+                    },
+                    
+                    performGrouping(docs, groupSpec) {
+                        const groups = {};
+                        const idField = groupSpec._id;
+                        
+                        docs.forEach(doc => {
+                            const groupKey = typeof idField === 'string' && idField.startsWith('$') 
+                                ? doc[idField.slice(1)] 
+                                : idField;
+                            
+                            if (!groups[groupKey]) {
+                                groups[groupKey] = { _id: groupKey, docs: [] };
+                            }
+                            groups[groupKey].docs.push(doc);
+                        });
+                        
+                        return Object.values(groups).map(group => {
+                            const result = { _id: group._id };
+                            
+                            for (let field in groupSpec) {
+                                if (field === '_id') continue;
+                                
+                                const accumulator = groupSpec[field];
+                                const accOp = Object.keys(accumulator)[0];
+                                const accField = accumulator[accOp];
+                                
+                                switch(accOp) {
+                                    case '$sum':
+                                        result[field] = accField === 1 
+                                            ? group.docs.length 
+                                            : group.docs.reduce((sum, doc) => sum + (doc[accField.slice(1)] || 0), 0);
+                                        break;
+                                    case '$avg':
+                                        const values = group.docs.map(doc => doc[accField.slice(1)] || 0);
+                                        result[field] = values.reduce((a, b) => a + b, 0) / values.length;
+                                        break;
+                                    case '$min':
+                                        result[field] = Math.min(...group.docs.map(doc => doc[accField.slice(1)] || 0));
+                                        break;
+                                    case '$max':
+                                        result[field] = Math.max(...group.docs.map(doc => doc[accField.slice(1)] || 0));
+                                        break;
+                                    case '$first':
+                                        result[field] = group.docs[0]?.[accField.slice(1)];
+                                        break;
+                                    case '$last':
+                                        result[field] = group.docs[group.docs.length - 1]?.[accField.slice(1)];
+                                        break;
+                                    case '$push':
+                                        result[field] = group.docs.map(doc => doc[accField.slice(1)]);
+                                        break;
+                                }
+                            }
+                            
+                            return result;
+                        });
+                    },
+                    
+                    performSort(docs, sortSpec) {
+                        return docs.sort((a, b) => {
+                            for (let field in sortSpec) {
+                                const direction = sortSpec[field];
+                                const aVal = this.getNestedValue(a, field);
+                                const bVal = this.getNestedValue(b, field);
+                                
+                                if (aVal < bVal) return -1 * direction;
+                                if (aVal > bVal) return 1 * direction;
+                            }
+                            return 0;
+                        });
+                    },
+                    
+                    evaluateExpression(doc, expr) {
+                        if (typeof expr === 'string' && expr.startsWith('$')) {
+                            return this.getNestedValue(doc, expr.slice(1));
+                        }
+                        return expr;
+                    }
+                };
+            }
         };
 
-        const initialData = [
-            { _id: 1, name: "Budi", role: "admin", age: 28, skills: ["js", "sql"] },
-            { _id: 2, name: "Siti", role: "user", age: 22, skills: ["design"] },
-            { _id: 3, name: "Joko", role: "user", age: 30, skills: ["python", "sql"] },
-            { _id: 4, name: "Rina", role: "admin", age: 25, skills: ["js"] }
-        ];
+        // Initial datasets
+        const datasets = {
+            users: [
+                { _id: 1, name: "Budi", role: "admin", age: 28, city: "Jakarta", skills: ["js", "sql"], salary: 8000 },
+                { _id: 2, name: "Siti", role: "user", age: 22, city: "Bandung", skills: ["design"], salary: 5000 },
+                { _id: 3, name: "Joko", role: "user", age: 30, city: "Jakarta", skills: ["python", "sql"], salary: 7000 },
+                { _id: 4, name: "Rina", role: "admin", age: 25, city: "Surabaya", skills: ["js"], salary: 7500 }
+            ],
+            products: [
+                { _id: 1, name: "Laptop", price: 1000, stock: 15, category: "electronics", tags: ["tech", "computer"] },
+                { _id: 2, name: "Mouse", price: 25, stock: 50, category: "electronics", tags: ["tech", "accessory"] },
+                { _id: 3, name: "Desk", price: 200, stock: 10, category: "furniture", tags: ["office"] },
+                { _id: 4, name: "Chair", price: 150, stock: 20, category: "furniture", tags: ["office", "comfort"] }
+            ],
+            orders: [
+                { _id: 1, userId: 1, productId: 1, quantity: 2, total: 2000, status: "shipped", date: "2024-01-15" },
+                { _id: 2, userId: 2, productId: 2, quantity: 3, total: 75, status: "delivered", date: "2024-01-20" },
+                { _id: 3, userId: 1, productId: 3, quantity: 1, total: 200, status: "pending", date: "2024-02-01" },
+                { _id: 4, userId: 3, productId: 1, quantity: 1, total: 1000, status: "shipped", date: "2024-02-05" }
+            ],
+            blogs: [
+                { _id: 1, title: "NoSQL Basics", author: "Budi", views: 150, tags: ["database", "tutorial"], comments: [
+                    { user: "Siti", text: "Great post!" },
+                    { user: "Joko", text: "Very helpful" }
+                ]},
+                { _id: 2, title: "JavaScript Tips", author: "Rina", views: 200, tags: ["javascript", "coding"], comments: [
+                    { user: "Budi", text: "Thanks!" }
+                ]},
+                { _id: 3, title: "Design Patterns", author: "Siti", views: 180, tags: ["design", "architecture"], comments: [] }
+            ]
+        };
 
+        // ALL 90 LEVELS - Complete Curriculum
         const levels = [
+            // WORLD 1: THE OBJECT (Levels 1-9)
             {
-                id: 1,
+                id: 1, world: 1, collection: "users",
                 title: { id: "Semua Dokumen", en: "All Documents" },
                 description: { 
                     id: "Di NoSQL, data disimpan sebagai **Dokumen** (mirip JSON) di dalam **Collection** (mirip Tabel). Coba lihat semua data user.",
@@ -290,7 +630,7 @@
                 expectedCheck: (res) => res.length === 4
             },
             {
-                id: 2,
+                id: 2, world: 1, collection: "users",
                 title: { id: "Filter Key-Value", en: "Filter Key-Value" },
                 description: { 
                     id: "Kita hanya butuh user dengan role **'admin'**.",
@@ -309,51 +649,1762 @@
                 expectedCheck: (res) => res.length === 2 && res.every(u => u.role === 'admin')
             },
             {
-                id: 3,
+                id: 3, world: 1, collection: "users",
                 title: { id: "Insert Data", en: "Insert Data" },
                 description: { 
                     id: "Ada user baru! Tambahkan data ke collection users.",
                     en: "New user incoming! Add data to the users collection."
                 },
                 instruction: {
-                    id: "Gunakan `insertOne` dengan data: `{ name: 'Dewi', role: 'user' }`",
-                    en: "Use `insertOne` with data: `{ name: 'Dewi', role: 'user' }`"
+                    id: "Gunakan `db.users.insertOne()` dengan data: `{ name: 'Dewi', role: 'user', age: 24 }`",
+                    en: "Use `db.users.insertOne()` with data: `{ name: 'Dewi', role: 'user', age: 24 }`"
                 },
-                hint: { id: "db.users.insertOne({ name: 'Dewi', role: 'user' })", en: "db.users.insertOne({ name: 'Dewi', role: 'user' })" },
+                hint: { id: "db.users.insertOne({ name: 'Dewi', role: 'user', age: 24 })", en: "db.users.insertOne({ name: 'Dewi', role: 'user', age: 24 })" },
                 explanation: { 
-                    id: "Perhatikan: NoSQL tidak butuh skema ketat. Kamu bisa saja menambahkan field lain yang tidak ada di user sebelumnya!",
-                    en: "Note: NoSQL implies no strict schema. You could add fields that didn't exist in previous users!"
+                    id: "NoSQL tidak butuh skema ketat. Kamu bisa menambahkan field yang tidak ada di dokumen lain!",
+                    en: "NoSQL doesn't require strict schemas. You can add fields that don't exist in other documents!"
                 },
-                initialCode: "db.users.insertOne({\n  name: '...',\n  role: '...'\n})",
-                expectedCheck: (res, fullDb) => fullDb.length === 5 && fullDb.find(u => u.name === 'Dewi')
+                initialCode: "db.users.insertOne({\n  name: '...',\n  role: '...',\n  age: ...\n})",
+                expectedCheck: (res, fullDb) => fullDb.length === 5 && fullDb.users.data.find(u => u.name === 'Dewi')
+            },
+            {
+                id: 4, world: 1, collection: "users",
+                title: { id: "Cari Satu Dokumen", en: "Find One Document" },
+                description: { 
+                    id: "Kadang kita hanya butuh **satu** dokumen saja, bukan array.",
+                    en: "Sometimes we only need **one** document, not an array."
+                },
+                instruction: {
+                    id: "Gunakan `db.users.findOne({ name: 'Budi' })` untuk mengambil satu user.",
+                    en: "Use `db.users.findOne({ name: 'Budi' })` to get one user."
+                },
+                hint: { id: "db.users.findOne({ name: 'Budi' })", en: "db.users.findOne({ name: 'Budi' })" },
+                explanation: { 
+                    id: "`findOne()` mengembalikan object pertama yang cocok, bukan array. Mirip `LIMIT 1` di SQL.",
+                    en: "`findOne()` returns the first matching object, not an array. Similar to SQL's `LIMIT 1`."
+                },
+                initialCode: "db.users.findOne({\n  name: '...'\n})",
+                expectedCheck: (res) => res && res.name === 'Budi'
+            },
+            {
+                id: 5, world: 1, collection: "products",
+                title: { id: "Koleksi Berbeda", en: "Different Collection" },
+                description: { 
+                    id: "Database punya banyak collection. Mari beralih ke **products**.",
+                    en: "A database has many collections. Let's switch to **products**."
+                },
+                instruction: {
+                    id: "Ambil semua produk dengan `db.products.find({})`",
+                    en: "Get all products with `db.products.find({})`"
+                },
+                hint: { id: "db.products.find({})", en: "db.products.find({})" },
+                explanation: { 
+                    id: "Setiap collection menyimpan jenis data berbeda. `products` tidak berhubungan dengan `users`.",
+                    en: "Each collection stores different data types. `products` are independent from `users`."
+                },
+                initialCode: "db.products.find({\n  \n})",
+                expectedCheck: (res) => res.length === 4
+            },
+            {
+                id: 6, world: 1, collection: "products",
+                title: { id: "Filter Angka", en: "Filter Numbers" },
+                description: { 
+                    id: "Filter tidak hanya untuk string. Cari produk dengan **price: 25**.",
+                    en: "Filters work for numbers too. Find products with **price: 25**."
+                },
+                instruction: {
+                    id: "Gunakan `db.products.find({ price: 25 })`",
+                    en: "Use `db.products.find({ price: 25 })`"
+                },
+                hint: { id: "db.products.find({ price: 25 })", en: "db.products.find({ price: 25 })" },
+                explanation: { 
+                    id: "JSON mendukung berbagai tipe data: string, number, boolean, array, object.",
+                    en: "JSON supports various data types: string, number, boolean, array, object."
+                },
+                initialCode: "db.products.find({\n  price: ...\n})",
+                expectedCheck: (res) => res.length === 1 && res[0].price === 25
+            },
+            {
+                id: 7, world: 1, collection: "products",
+                title: { id: "Multiple Insert", en: "Multiple Insert" },
+                description: { 
+                    id: "Tambahkan banyak produk sekaligus dengan `insertMany()`.",
+                    en: "Add multiple products at once with `insertMany()`."
+                },
+                instruction: {
+                    id: "Insert array: `[{ name: 'Keyboard', price: 50 }, { name: 'Monitor', price: 300 }]`",
+                    en: "Insert array: `[{ name: 'Keyboard', price: 50 }, { name: 'Monitor', price: 300 }]`"
+                },
+                hint: { id: "db.products.insertMany([{ name: 'Keyboard', price: 50 }, { name: 'Monitor', price: 300 }])", en: "db.products.insertMany([{ name: 'Keyboard', price: 50 }, { name: 'Monitor', price: 300 }])" },
+                explanation: { 
+                    id: "`insertMany()` lebih efisien daripada multiple `insertOne()` untuk bulk insert.",
+                    en: "`insertMany()` is more efficient than multiple `insertOne()` for bulk inserts."
+                },
+                initialCode: "db.products.insertMany([\n  { name: '...', price: ... },\n  { name: '...', price: ... }\n])",
+                expectedCheck: (res, fullDb) => fullDb.products.data.length === 6
+            },
+            {
+                id: 8, world: 1, collection: "users",
+                title: { id: "Multi-Field Filter", en: "Multi-Field Filter" },
+                description: { 
+                    id: "Filter dengan dua kondisi: **role: 'admin'** DAN **age: 28**.",
+                    en: "Filter with two conditions: **role: 'admin'** AND **age: 28**."
+                },
+                instruction: {
+                    id: "Gunakan `db.users.find({ role: 'admin', age: 28 })`",
+                    en: "Use `db.users.find({ role: 'admin', age: 28 })`"
+                },
+                hint: { id: "db.users.find({ role: 'admin', age: 28 })", en: "db.users.find({ role: 'admin', age: 28 })" },
+                explanation: { 
+                    id: "Multiple fields dalam satu object berarti AND. Semua kondisi harus terpenuhi.",
+                    en: "Multiple fields in one object means AND. All conditions must match."
+                },
+                initialCode: "db.users.find({\n  role: '...',\n  age: ...\n})",
+                expectedCheck: (res) => res.length === 1 && res[0].name === 'Budi'
+            },
+            {
+                id: 9, world: 1, collection: "products",
+                title: { id: "String vs Number", en: "String vs Number" },
+                description: { 
+                    id: "JSON strict tentang tipe data. `'25'` (string) ≠ `25` (number).",
+                    en: "JSON is strict about data types. `'25'` (string) ≠ `25` (number)."
+                },
+                instruction: {
+                    id: "Coba query `{ price: '25' }` dan bandingkan dengan `{ price: 25 }`",
+                    en: "Try query `{ price: '25' }` and compare with `{ price: 25 }`"
+                },
+                hint: { id: "db.products.find({ price: '25' })", en: "db.products.find({ price: '25' })" },
+                explanation: { 
+                    id: "String dalam quotes tidak akan match dengan number. Pastikan tipe data sesuai!",
+                    en: "String in quotes won't match numbers. Make sure data types are correct!"
+                },
+                initialCode: "db.products.find({\n  price: '25' // Coba ganti ke 25\n})",
+                expectedCheck: (res) => res.length === 0
+            },
+
+            // WORLD 2: THE NAVIGATOR (Levels 10-18)
+            {
+                id: 10, world: 2, collection: "users",
+                title: { id: "Nested Fields", en: "Nested Fields" },
+                description: { 
+                    id: "Dokumen bisa punya **nested objects**. Lihat users dengan field `address.city`.",
+                    en: "Documents can have **nested objects**. View users with `address.city` field."
+                },
+                instruction: {
+                    id: "Dataset diperluas. Gunakan `db.users.find({ city: 'Jakarta' })` untuk filter by kota.",
+                    en: "Dataset expanded. Use `db.users.find({ city: 'Jakarta' })` to filter by city."
+                },
+                hint: { id: "db.users.find({ city: 'Jakarta' })", en: "db.users.find({ city: 'Jakarta' })" },
+                explanation: { 
+                    id: "Untuk nested field gunakan dot notation: `'address.city'` atau langsung jika flat.",
+                    en: "For nested fields use dot notation: `'address.city'` or directly if flat."
+                },
+                initialCode: "db.users.find({\n  city: '...'\n})",
+                expectedCheck: (res) => res.length === 2 && res.every(u => u.city === 'Jakarta')
+            },
+            {
+                id: 11, world: 2, collection: "users",
+                title: { id: "Projection Basics", en: "Projection Basics" },
+                description: { 
+                    id: "Kadang kita tidak butuh semua field. Gunakan **projection** untuk memilih field tertentu.",
+                    en: "Sometimes we don't need all fields. Use **projection** to select specific fields."
+                },
+                instruction: {
+                    id: "Tampilkan hanya `name` dan `role`: `db.users.find({}, { name: 1, role: 1 })`",
+                    en: "Show only `name` and `role`: `db.users.find({}, { name: 1, role: 1 })`"
+                },
+                hint: { id: "db.users.find({}, { name: 1, role: 1 })", en: "db.users.find({}, { name: 1, role: 1 })" },
+                explanation: { 
+                    id: "Projection parameter kedua: `1` = include, `0` = exclude. `_id` selalu included kecuali di-exclude.",
+                    en: "Second projection parameter: `1` = include, `0` = exclude. `_id` is always included unless excluded."
+                },
+                initialCode: "db.users.find({}, {\n  name: 1,\n  role: ...\n})",
+                expectedCheck: (res) => res.length > 0 && res.every(u => u.name && u.role && !u.age)
+            },
+            {
+                id: 12, world: 2, collection: "users",
+                title: { id: "Exclude Fields", en: "Exclude Fields" },
+                description: { 
+                    id: "Exclude semua field kecuali yang kita butuhkan.",
+                    en: "Exclude all fields except what we need."
+                },
+                instruction: {
+                    id: "Sembunyikan field `skills` dan `salary`: `db.users.find({}, { skills: 0, salary: 0 })`",
+                    en: "Hide `skills` and `salary` fields: `db.users.find({}, { skills: 0, salary: 0 })`"
+                },
+                hint: { id: "db.users.find({}, { skills: 0, salary: 0 })", en: "db.users.find({}, { skills: 0, salary: 0 })" },
+                explanation: { 
+                    id: "Tidak bisa mix inclusion (1) dan exclusion (0) kecuali untuk `_id`.",
+                    en: "Cannot mix inclusion (1) and exclusion (0) except for `_id`."
+                },
+                initialCode: "db.users.find({}, {\n  skills: ...,\n  salary: ...\n})",
+                expectedCheck: (res) => res.length > 0 && res.every(u => !u.skills && !u.salary)
+            },
+            {
+                id: 13, world: 2, collection: "products",
+                title: { id: "Filter + Projection", en: "Filter + Projection" },
+                description: { 
+                    id: "Kombinasikan filter dan projection untuk hasil yang presisi.",
+                    en: "Combine filter and projection for precise results."
+                },
+                instruction: {
+                    id: "Ambil produk `category: 'electronics'`, tampilkan hanya `name` dan `price`.",
+                    en: "Get products with `category: 'electronics'`, show only `name` and `price`."
+                },
+                hint: { id: "db.products.find({ category: 'electronics' }, { name: 1, price: 1 })", en: "db.products.find({ category: 'electronics' }, { name: 1, price: 1 })" },
+                explanation: { 
+                    id: "Filter (param 1) untuk WHERE, Projection (param 2) untuk SELECT.",
+                    en: "Filter (param 1) for WHERE, Projection (param 2) for SELECT."
+                },
+                initialCode: "db.products.find(\n  { category: '...' },\n  { name: 1, price: ... }\n)",
+                expectedCheck: (res) => res.length === 2 && res.every(p => p.name && p.price && !p.stock)
+            },
+            {
+                id: 14, world: 2, collection: "orders",
+                title: { id: "Koleksi Orders", en: "Orders Collection" },
+                description: { 
+                    id: "Collection `orders` menyimpan data transaksi. Lihat semua orders.",
+                    en: "The `orders` collection stores transaction data. View all orders."
+                },
+                instruction: {
+                    id: "Gunakan `db.orders.find({})` untuk melihat semua orders.",
+                    en: "Use `db.orders.find({})` to see all orders."
+                },
+                hint: { id: "db.orders.find({})", en: "db.orders.find({})" },
+                explanation: { 
+                    id: "Collection berbeda untuk data berbeda. `orders` terpisah dari `users` dan `products`.",
+                    en: "Different collections for different data. `orders` is separate from `users` and `products`."
+                },
+                initialCode: "db.orders.find({\n  \n})",
+                expectedCheck: (res) => res.length === 4
+            },
+            {
+                id: 15, world: 2, collection: "orders",
+                title: { id: "Filter Status", en: "Filter Status" },
+                description: { 
+                    id: "Cari orders dengan status **'shipped'**.",
+                    en: "Find orders with status **'shipped'**."
+                },
+                instruction: {
+                    id: "Filter: `db.orders.find({ status: 'shipped' })`",
+                    en: "Filter: `db.orders.find({ status: 'shipped' })`"
+                },
+                hint: { id: "db.orders.find({ status: 'shipped' })", en: "db.orders.find({ status: 'shipped' })" },
+                explanation: { 
+                    id: "String matching case-sensitive. 'shipped' ≠ 'Shipped'.",
+                    en: "String matching is case-sensitive. 'shipped' ≠ 'Shipped'."
+                },
+                initialCode: "db.orders.find({\n  status: '...'\n})",
+                expectedCheck: (res) => res.length === 2 && res.every(o => o.status === 'shipped')
+            },
+            {
+                id: 16, world: 2, collection: "orders",
+                title: { id: "Filter by User", en: "Filter by User" },
+                description: { 
+                    id: "Cari semua orders dari user dengan `userId: 1`.",
+                    en: "Find all orders from user with `userId: 1`."
+                },
+                instruction: {
+                    id: "Gunakan `db.orders.find({ userId: 1 })`",
+                    en: "Use `db.orders.find({ userId: 1 })`"
+                },
+                hint: { id: "db.orders.find({ userId: 1 })", en: "db.orders.find({ userId: 1 })" },
+                explanation: { 
+                    id: "NoSQL tidak punya JOIN otomatis. Kamu harus query terpisah untuk relasi antar collection.",
+                    en: "NoSQL has no automatic JOINs. You must query separately for relations between collections."
+                },
+                initialCode: "db.orders.find({\n  userId: ...\n})",
+                expectedCheck: (res) => res.length === 2 && res.every(o => o.userId === 1)
+            },
+            {
+                id: 17, world: 2, collection: "blogs",
+                title: { id: "Blog Collection", en: "Blog Collection" },
+                description: { 
+                    id: "Collection `blogs` punya field array `tags` dan `comments`. Lihat semua blog posts.",
+                    en: "The `blogs` collection has array fields `tags` and `comments`. View all blog posts."
+                },
+                instruction: {
+                    id: "Ambil semua blogs: `db.blogs.find({})`",
+                    en: "Get all blogs: `db.blogs.find({})`"
+                },
+                hint: { id: "db.blogs.find({})", en: "db.blogs.find({})" },
+                explanation: { 
+                    id: "Array adalah tipe data valid di JSON. Bisa berisi primitive atau objects.",
+                    en: "Arrays are valid data types in JSON. Can contain primitives or objects."
+                },
+                initialCode: "db.blogs.find({\n  \n})",
+                expectedCheck: (res) => res.length === 3
+            },
+            {
+                id: 18, world: 2, collection: "blogs",
+                title: { id: "Filter by Author", en: "Filter by Author" },
+                description: { 
+                    id: "Cari blog posts yang ditulis oleh **'Budi'**.",
+                    en: "Find blog posts written by **'Budi'**."
+                },
+                instruction: {
+                    id: "Filter: `db.blogs.find({ author: 'Budi' })`",
+                    en: "Filter: `db.blogs.find({ author: 'Budi' })`"
+                },
+                hint: { id: "db.blogs.find({ author: 'Budi' })", en: "db.blogs.find({ author: 'Budi' })" },
+                explanation: { 
+                    id: "Field regular seperti string bisa di-filter dengan equality matching.",
+                    en: "Regular fields like strings can be filtered with equality matching."
+                },
+                initialCode: "db.blogs.find({\n  author: '...'\n})",
+                expectedCheck: (res) => res.length === 1 && res[0].author === 'Budi'
+            },
+
+            // WORLD 3: THE OPERATOR (Levels 19-27)
+            {
+                id: 19, world: 3, collection: "users",
+                title: { id: "Greater Than", en: "Greater Than" },
+                description: { 
+                    id: "Operator `$gt` untuk **greater than**. Cari users dengan age > 25.",
+                    en: "Use `$gt` operator for **greater than**. Find users with age > 25."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.find({ age: { $gt: 25 } })`",
+                    en: "Use: `db.users.find({ age: { $gt: 25 } })`"
+                },
+                hint: { id: "db.users.find({ age: { $gt: 25 } })", en: "db.users.find({ age: { $gt: 25 } })" },
+                explanation: { 
+                    id: "Operator dimulai dengan `$`. Sintaks: `{ field: { $operator: value } }`",
+                    en: "Operators start with `$`. Syntax: `{ field: { $operator: value } }`"
+                },
+                initialCode: "db.users.find({\n  age: { $gt: ... }\n})",
+                expectedCheck: (res) => res.length === 2 && res.every(u => u.age > 25)
+            },
+            {
+                id: 20, world: 3, collection: "users",
+                title: { id: "Less Than or Equal", en: "Less Than or Equal" },
+                description: { 
+                    id: "Operator `$lte` untuk **less than or equal**. Cari users age ≤ 25.",
+                    en: "Use `$lte` operator for **less than or equal**. Find users with age ≤ 25."
+                },
+                instruction: {
+                    id: "Filter: `db.users.find({ age: { $lte: 25 } })`",
+                    en: "Filter: `db.users.find({ age: { $lte: 25 } })`"
+                },
+                hint: { id: "db.users.find({ age: { $lte: 25 } })", en: "db.users.find({ age: { $lte: 25 } })" },
+                explanation: { 
+                    id: "Comparison operators: `$gt` (>), `$gte` (≥), `$lt` (<), `$lte` (≤), `$eq` (=), `$ne` (≠)",
+                    en: "Comparison operators: `$gt` (>), `$gte` (≥), `$lt` (<), `$lte` (≤), `$eq` (=), `$ne` (≠)"
+                },
+                initialCode: "db.users.find({\n  age: { $lte: ... }\n})",
+                expectedCheck: (res) => res.length === 2 && res.every(u => u.age <= 25)
+            },
+            {
+                id: 21, world: 3, collection: "products",
+                title: { id: "Range Query", en: "Range Query" },
+                description: { 
+                    id: "Cari produk dengan price antara 50-200 (50 ≤ price ≤ 200).",
+                    en: "Find products with price between 50-200 (50 ≤ price ≤ 200)."
+                },
+                instruction: {
+                    id: "Gunakan: `db.products.find({ price: { $gte: 50, $lte: 200 } })`",
+                    en: "Use: `db.products.find({ price: { $gte: 50, $lte: 200 } })`"
+                },
+                hint: { id: "db.products.find({ price: { $gte: 50, $lte: 200 } })", en: "db.products.find({ price: { $gte: 50, $lte: 200 } })" },
+                explanation: { 
+                    id: "Multiple operators pada satu field untuk range query.",
+                    en: "Multiple operators on one field for range queries."
+                },
+                initialCode: "db.products.find({\n  price: { $gte: ..., $lte: ... }\n})",
+                expectedCheck: (res) => res.length === 2 && res.every(p => p.price >= 50 && p.price <= 200)
+            },
+            {
+                id: 22, world: 3, collection: "users",
+                title: { id: "Not Equal", en: "Not Equal" },
+                description: { 
+                    id: "Operator `$ne` untuk **not equal**. Cari users yang bukan admin.",
+                    en: "Use `$ne` operator for **not equal**. Find users who are not admins."
+                },
+                instruction: {
+                    id: "Filter: `db.users.find({ role: { $ne: 'admin' } })`",
+                    en: "Filter: `db.users.find({ role: { $ne: 'admin' } })`"
+                },
+                hint: { id: "db.users.find({ role: { $ne: 'admin' } })", en: "db.users.find({ role: { $ne: 'admin' } })" },
+                explanation: { 
+                    id: "`$ne` adalah kebalikan dari equality match. Mengembalikan dokumen yang field-nya tidak sama.",
+                    en: "`$ne` is the opposite of equality match. Returns documents where field is not equal."
+                },
+                initialCode: "db.users.find({\n  role: { $ne: '...' }\n})",
+                expectedCheck: (res) => res.length === 2 && res.every(u => u.role !== 'admin')
+            },
+            {
+                id: 23, world: 3, collection: "products",
+                title: { id: "In Operator", en: "In Operator" },
+                description: { 
+                    id: "Operator `$in` untuk match salah satu dari beberapa value. Cari products dengan category 'electronics' atau 'furniture'.",
+                    en: "Use `$in` operator to match any of several values. Find products with category 'electronics' or 'furniture'."
+                },
+                instruction: {
+                    id: "Gunakan: `db.products.find({ category: { $in: ['electronics', 'furniture'] } })`",
+                    en: "Use: `db.products.find({ category: { $in: ['electronics', 'furniture'] } })`"
+                },
+                hint: { id: "db.products.find({ category: { $in: ['electronics', 'furniture'] } })", en: "db.products.find({ category: { $in: ['electronics', 'furniture'] } })" },
+                explanation: { 
+                    id: "`$in` seperti SQL IN clause. Value harus array.",
+                    en: "`$in` is like SQL IN clause. Value must be an array."
+                },
+                initialCode: "db.products.find({\n  category: { $in: ['...', '...'] }\n})",
+                expectedCheck: (res) => res.length === 4
+            },
+            {
+                id: 24, world: 3, collection: "users",
+                title: { id: "OR Logic", en: "OR Logic" },
+                description: { 
+                    id: "Operator `$or` untuk multiple conditions. Cari users yang age > 28 ATAU role = 'admin'.",
+                    en: "Use `$or` operator for multiple conditions. Find users with age > 28 OR role = 'admin'."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.find({ $or: [{ age: { $gt: 28 } }, { role: 'admin' }] })`",
+                    en: "Use: `db.users.find({ $or: [{ age: { $gt: 28 } }, { role: 'admin' }] })`"
+                },
+                hint: { id: "db.users.find({ $or: [{ age: { $gt: 28 } }, { role: 'admin' }] })", en: "db.users.find({ $or: [{ age: { $gt: 28 } }, { role: 'admin' }] })" },
+                explanation: { 
+                    id: "`$or` takes array of query conditions. Dokumen match jika salah satu kondisi terpenuhi.",
+                    en: "`$or` takes array of query conditions. Document matches if any condition is true."
+                },
+                initialCode: "db.users.find({\n  $or: [\n    { age: { $gt: ... } },\n    { role: '...' }\n  ]\n})",
+                expectedCheck: (res) => res.length === 3
+            },
+            {
+                id: 25, world: 3, collection: "users",
+                title: { id: "AND + OR", en: "AND + OR" },
+                description: { 
+                    id: "Kombinasi AND dan OR. Cari admin ATAU (user dengan age > 25).",
+                    en: "Combine AND and OR. Find admins OR (users with age > 25)."
+                },
+                instruction: {
+                    id: "Filter: role = 'admin' OR (role = 'user' AND age > 25)",
+                    en: "Filter: role = 'admin' OR (role = 'user' AND age > 25)"
+                },
+                hint: { id: "db.users.find({ $or: [{ role: 'admin' }, { role: 'user', age: { $gt: 25 } }] })", en: "db.users.find({ $or: [{ role: 'admin' }, { role: 'user', age: { $gt: 25 } }] })" },
+                explanation: { 
+                    id: "Multiple fields dalam satu object = AND. `$or` array untuk OR logic.",
+                    en: "Multiple fields in one object = AND. `$or` array for OR logic."
+                },
+                initialCode: "db.users.find({\n  $or: [\n    { role: '...' },\n    { role: '...', age: { $gt: ... } }\n  ]\n})",
+                expectedCheck: (res) => res.length === 3
+            },
+            {
+                id: 26, world: 3, collection: "products",
+                title: { id: "Exists Operator", en: "Exists Operator" },
+                description: { 
+                    id: "Operator `$exists` untuk check apakah field ada atau tidak. Cari produk yang punya field `tags`.",
+                    en: "Use `$exists` operator to check if field exists. Find products that have `tags` field."
+                },
+                instruction: {
+                    id: "Gunakan: `db.products.find({ tags: { $exists: true } })`",
+                    en: "Use: `db.products.find({ tags: { $exists: true } })`"
+                },
+                hint: { id: "db.products.find({ tags: { $exists: true } })", en: "db.products.find({ tags: { $exists: true } })" },
+                explanation: { 
+                    id: "`$exists: true` = field ada, `$exists: false` = field tidak ada. Berguna untuk schema-less documents.",
+                    en: "`$exists: true` = field exists, `$exists: false` = field doesn't exist. Useful for schema-less documents."
+                },
+                initialCode: "db.products.find({\n  tags: { $exists: ... }\n})",
+                expectedCheck: (res) => res.length === 4
+            },
+            {
+                id: 27, world: 3, collection: "users",
+                title: { id: "Type Check", en: "Type Check" },
+                description: { 
+                    id: "Operator `$type` untuk check tipe data. Cari users dengan field age bertipe 'number'.",
+                    en: "Use `$type` operator to check data type. Find users with age field of type 'number'."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.find({ age: { $type: 'number' } })`",
+                    en: "Use: `db.users.find({ age: { $type: 'number' } })`"
+                },
+                hint: { id: "db.users.find({ age: { $type: 'number' } })", en: "db.users.find({ age: { $type: 'number' } })" },
+                explanation: { 
+                    id: "Types: 'string', 'number', 'boolean', 'object', 'array'. Berguna untuk data validation.",
+                    en: "Types: 'string', 'number', 'boolean', 'object', 'array'. Useful for data validation."
+                },
+                initialCode: "db.users.find({\n  age: { $type: '...' }\n})",
+                expectedCheck: (res) => res.length === 4
+            },
+
+            // WORLD 4: THE ARRAY MASTER (Levels 28-36)
+            {
+                id: 28, world: 4, collection: "users",
+                title: { id: "Array Contains", en: "Array Contains" },
+                description: { 
+                    id: "Cari users yang punya skill **'js'** dalam array skills.",
+                    en: "Find users who have **'js'** skill in their skills array."
+                },
+                instruction: {
+                    id: "Filter: `db.users.find({ skills: 'js' })` - match element dalam array",
+                    en: "Filter: `db.users.find({ skills: 'js' })` - match element in array"
+                },
+                hint: { id: "db.users.find({ skills: 'js' })", en: "db.users.find({ skills: 'js' })" },
+                explanation: { 
+                    id: "Untuk array field, equality match akan check apakah value ada dalam array.",
+                    en: "For array fields, equality match checks if value exists in array."
+                },
+                initialCode: "db.users.find({\n  skills: '...'\n})",
+                expectedCheck: (res) => res.length === 2 && res.every(u => u.skills.includes('js'))
+            },
+            {
+                id: 29, world: 4, collection: "blogs",
+                title: { id: "Array In", en: "Array In" },
+                description: { 
+                    id: "Cari blogs dengan tags 'database' atau 'tutorial'.",
+                    en: "Find blogs with tags 'database' or 'tutorial'."
+                },
+                instruction: {
+                    id: "Gunakan `$in`: `db.blogs.find({ tags: { $in: ['database', 'tutorial'] } })`",
+                    en: "Use `$in`: `db.blogs.find({ tags: { $in: ['database', 'tutorial'] } })`"
+                },
+                hint: { id: "db.blogs.find({ tags: { $in: ['database', 'tutorial'] } })", en: "db.blogs.find({ tags: { $in: ['database', 'tutorial'] } })" },
+                explanation: { 
+                    id: "`$in` works dengan array fields - match jika ada overlap.",
+                    en: "`$in` works with array fields - matches if there's overlap."
+                },
+                initialCode: "db.blogs.find({\n  tags: { $in: ['...', '...'] }\n})",
+                expectedCheck: (res) => res.length === 1
+            },
+            {
+                id: 30, world: 4, collection: "users",
+                title: { id: "All Operator", en: "All Operator" },
+                description: { 
+                    id: "Operator `$all` untuk match SEMUA values dalam array. Cari users dengan skill 'js' DAN 'sql'.",
+                    en: "Use `$all` operator to match ALL values in array. Find users with both 'js' AND 'sql' skills."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.find({ skills: { $all: ['js', 'sql'] } })`",
+                    en: "Use: `db.users.find({ skills: { $all: ['js', 'sql'] } })`"
+                },
+                hint: { id: "db.users.find({ skills: { $all: ['js', 'sql'] } })", en: "db.users.find({ skills: { $all: ['js', 'sql'] } })" },
+                explanation: { 
+                    id: "`$all` memastikan array mengandung SEMUA values yang di-specify. Berbeda dari `$in` (salah satu).",
+                    en: "`$all` ensures array contains ALL specified values. Different from `$in` (any)."
+                },
+                initialCode: "db.users.find({\n  skills: { $all: ['...', '...'] }\n})",
+                expectedCheck: (res) => res.length === 1 && res[0].name === 'Budi'
+            },
+            {
+                id: 31, world: 4, collection: "products",
+                title: { id: "Array Size", en: "Array Size" },
+                description: { 
+                    id: "Operator `$size` untuk match array berdasarkan length. Cari products dengan tepat 2 tags.",
+                    en: "Use `$size` operator to match arrays by length. Find products with exactly 2 tags."
+                },
+                instruction: {
+                    id: "Filter: `db.products.find({ tags: { $size: 2 } })`",
+                    en: "Filter: `db.products.find({ tags: { $size: 2 } })`"
+                },
+                hint: { id: "db.products.find({ tags: { $size: 2 } })", en: "db.products.find({ tags: { $size: 2 } })" },
+                explanation: { 
+                    id: "`$size` only accepts exact number. Tidak bisa `$size: { $gt: 2 }` - use array length operators jika butuh range.",
+                    en: "`$size` only accepts exact number. Can't do `$size: { $gt: 2 }` - use array length operators if range needed."
+                },
+                initialCode: "db.products.find({\n  tags: { $size: ... }\n})",
+                expectedCheck: (res) => res.length === 3
+            },
+            {
+                id: 32, world: 4, collection: "blogs",
+                title: { id: "ElemMatch Intro", en: "ElemMatch Intro" },
+                description: { 
+                    id: "Array of objects butuh `$elemMatch`. Cari blogs dengan comment dari 'Siti'.",
+                    en: "Arrays of objects need `$elemMatch`. Find blogs with a comment from 'Siti'."
+                },
+                instruction: {
+                    id: "Gunakan: `db.blogs.find({ comments: { $elemMatch: { user: 'Siti' } } })`",
+                    en: "Use: `db.blogs.find({ comments: { $elemMatch: { user: 'Siti' } } })`"
+                },
+                hint: { id: "db.blogs.find({ comments: { $elemMatch: { user: 'Siti' } } })", en: "db.blogs.find({ comments: { $elemMatch: { user: 'Siti' } } })" },
+                explanation: { 
+                    id: "`$elemMatch` matches jika ada minimal SATU element dalam array yang memenuhi semua kondisi.",
+                    en: "`$elemMatch` matches if at least ONE array element meets all conditions."
+                },
+                initialCode: "db.blogs.find({\n  comments: {\n    $elemMatch: { user: '...' }\n  }\n})",
+                expectedCheck: (res) => res.length === 1
+            },
+            {
+                id: 33, world: 4, collection: "blogs",
+                title: { id: "Empty Array", en: "Empty Array" },
+                description: { 
+                    id: "Cari blogs yang tidak punya comment (array kosong).",
+                    en: "Find blogs with no comments (empty array)."
+                },
+                instruction: {
+                    id: "Match array kosong: `db.blogs.find({ comments: [] })`",
+                    en: "Match empty array: `db.blogs.find({ comments: [] })`"
+                },
+                hint: { id: "db.blogs.find({ comments: [] })", en: "db.blogs.find({ comments: [] })" },
+                explanation: { 
+                    id: "Empty array `[]` bisa di-match langsung dengan equality. Atau gunakan `$size: 0`.",
+                    en: "Empty array `[]` can be matched directly with equality. Or use `$size: 0`."
+                },
+                initialCode: "db.blogs.find({\n  comments: ...\n})",
+                expectedCheck: (res) => res.length === 1 && res[0].comments.length === 0
+            },
+            {
+                id: 34, world: 4, collection: "users",
+                title: { id: "NOT In", en: "NOT In" },
+                description: { 
+                    id: "Operator `$nin` untuk **not in**. Cari users yang TIDAK punya skill 'sql'.",
+                    en: "Use `$nin` operator for **not in**. Find users who DON'T have 'sql' skill."
+                },
+                instruction: {
+                    id: "Filter: `db.users.find({ skills: { $nin: ['sql'] } })`",
+                    en: "Filter: `db.users.find({ skills: { $nin: ['sql'] } })`"
+                },
+                hint: { id: "db.users.find({ skills: { $nin: ['sql'] } })", en: "db.users.find({ skills: { $nin: ['sql'] } })" },
+                explanation: { 
+                    id: "`$nin` adalah kebalikan dari `$in`. Returns documents yang array-nya tidak mengandung values tersebut.",
+                    en: "`$nin` is the opposite of `$in`. Returns documents whose array doesn't contain those values."
+                },
+                initialCode: "db.users.find({\n  skills: { $nin: ['...'] }\n})",
+                expectedCheck: (res) => res.length === 2
+            },
+            {
+                id: 35, world: 4, collection: "products",
+                title: { id: "Multiple Array Conditions", en: "Multiple Array Conditions" },
+                description: { 
+                    id: "Kombinasi array operators. Cari products dengan tags 'tech' dan size array ≥ 2.",
+                    en: "Combine array operators. Find products with 'tech' tag and array size ≥ 2."
+                },
+                instruction: {
+                    id: "Filter: tags contains 'tech' AND tags.$size >= 2",
+                    en: "Filter: tags contains 'tech' AND tags.$size >= 2"
+                },
+                hint: { id: "db.products.find({ tags: 'tech' })", en: "db.products.find({ tags: 'tech' })" },
+                explanation: { 
+                    id: "Multiple conditions pada array field bisa dikombinasikan. Perhatikan: `$size` tidak support range.",
+                    en: "Multiple conditions on array fields can be combined. Note: `$size` doesn't support ranges."
+                },
+                initialCode: "db.products.find({\n  tags: '...'\n})",
+                expectedCheck: (res) => res.length === 2 && res.every(p => p.tags.includes('tech') && p.tags.length >= 2)
+            },
+            {
+                id: 36, world: 4, collection: "blogs",
+                title: { id: "Complex ElemMatch", en: "Complex ElemMatch" },
+                description: { 
+                    id: "Advanced: Cari blog dengan comment yang textnya mengandung kata 'Great'.",
+                    en: "Advanced: Find blog with a comment whose text contains 'Great'."
+                },
+                instruction: {
+                    id: "Gunakan `$regex` dalam `$elemMatch`: `db.blogs.find({ comments: { $elemMatch: { text: { $regex: 'Great' } } } })`",
+                    en: "Use `$regex` in `$elemMatch`: `db.blogs.find({ comments: { $elemMatch: { text: { $regex: 'Great' } } } })`"
+                },
+                hint: { id: "db.blogs.find({ comments: { $elemMatch: { text: { $regex: 'Great' } } } })", en: "db.blogs.find({ comments: { $elemMatch: { text: { $regex: 'Great' } } } })" },
+                explanation: { 
+                    id: "`$elemMatch` bisa berisi operator lain seperti `$regex`, `$gt`, dll. untuk match complex conditions.",
+                    en: "`$elemMatch` can contain other operators like `$regex`, `$gt`, etc. for complex matching."
+                },
+                initialCode: "db.blogs.find({\n  comments: {\n    $elemMatch: {\n      text: { $regex: '...' }\n    }\n  }\n})",
+                expectedCheck: (res) => res.length === 1
+            },
+
+            // WORLD 5: THE MODIFIER I (Levels 37-45)
+            {
+                id: 37, world: 5, collection: "users",
+                title: { id: "Update One - Set", en: "Update One - Set" },
+                description: { 
+                    id: "Operator `$set` untuk update field. Update age Budi menjadi 29.",
+                    en: "Use `$set` operator to update fields. Update Budi's age to 29."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.updateOne({ name: 'Budi' }, { $set: { age: 29 } })`",
+                    en: "Use: `db.users.updateOne({ name: 'Budi' }, { $set: { age: 29 } })`"
+                },
+                hint: { id: "db.users.updateOne({ name: 'Budi' }, { $set: { age: 29 } })", en: "db.users.updateOne({ name: 'Budi' }, { $set: { age: 29 } })" },
+                explanation: { 
+                    id: "`updateOne(query, update)`: param 1 = filter, param 2 = update operators. `$set` replace field value.",
+                    en: "`updateOne(query, update)`: param 1 = filter, param 2 = update operators. `$set` replaces field value."
+                },
+                initialCode: "db.users.updateOne(\n  { name: '...' },\n  { $set: { age: ... } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const budi = fullDb.users.data.find(u => u.name === 'Budi');
+                    return budi && budi.age === 29;
+                }
+            },
+            {
+                id: 38, world: 5, collection: "products",
+                title: { id: "Update Many", en: "Update Many" },
+                description: { 
+                    id: "Update semua products electronics: naikkan price +10.",
+                    en: "Update all electronics products: increase price +10."
+                },
+                instruction: {
+                    id: "Gunakan `updateMany`: `db.products.updateMany({ category: 'electronics' }, { $inc: { price: 10 } })`",
+                    en: "Use `updateMany`: `db.products.updateMany({ category: 'electronics' }, { $inc: { price: 10 } })`"
+                },
+                hint: { id: "db.products.updateMany({ category: 'electronics' }, { $inc: { price: 10 } })", en: "db.products.updateMany({ category: 'electronics' }, { $inc: { price: 10 } })" },
+                explanation: { 
+                    id: "`$inc` increment numeric field. `updateMany` update semua documents yang match query.",
+                    en: "`$inc` increments numeric fields. `updateMany` updates all documents matching query."
+                },
+                initialCode: "db.products.updateMany(\n  { category: '...' },\n  { $inc: { price: ... } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const electronics = fullDb.products.data.filter(p => p.category === 'electronics');
+                    return electronics.every(p => p.price >= 35); // Original min was 25
+                }
+            },
+            {
+                id: 39, world: 5, collection: "users",
+                title: { id: "Unset Field", en: "Unset Field" },
+                description: { 
+                    id: "Operator `$unset` untuk hapus field. Hapus field `salary` dari Siti.",
+                    en: "Use `$unset` operator to remove fields. Remove `salary` field from Siti."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.updateOne({ name: 'Siti' }, { $unset: { salary: '' } })`",
+                    en: "Use: `db.users.updateOne({ name: 'Siti' }, { $unset: { salary: '' } })`"
+                },
+                hint: { id: "db.users.updateOne({ name: 'Siti' }, { $unset: { salary: '' } })", en: "db.users.updateOne({ name: 'Siti' }, { $unset: { salary: '' } })" },
+                explanation: { 
+                    id: "`$unset` menghapus field dari document. Value bisa '' atau 1, yang penting field name.",
+                    en: "`$unset` removes field from document. Value can be '' or 1, what matters is field name."
+                },
+                initialCode: "db.users.updateOne(\n  { name: '...' },\n  { $unset: { salary: '' } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const siti = fullDb.users.data.find(u => u.name === 'Siti');
+                    return siti && siti.salary === undefined;
+                }
+            },
+            {
+                id: 40, world: 5, collection: "products",
+                title: { id: "Multiply", en: "Multiply" },
+                description: { 
+                    id: "Operator `$mul` untuk multiply. Double stock of Desk (multiply by 2).",
+                    en: "Use `$mul` operator to multiply. Double stock of Desk (multiply by 2)."
+                },
+                instruction: {
+                    id: "Gunakan: `db.products.updateOne({ name: 'Desk' }, { $mul: { stock: 2 } })`",
+                    en: "Use: `db.products.updateOne({ name: 'Desk' }, { $mul: { stock: 2 } })`"
+                },
+                hint: { id: "db.products.updateOne({ name: 'Desk' }, { $mul: { stock: 2 } })", en: "db.products.updateOne({ name: 'Desk' }, { $mul: { stock: 2 } })" },
+                explanation: { 
+                    id: "`$mul` mengalikan numeric field dengan value. Berguna untuk percentage increase/decrease.",
+                    en: "`$mul` multiplies numeric field by value. Useful for percentage increases/decreases."
+                },
+                initialCode: "db.products.updateOne(\n  { name: '...' },\n  { $mul: { stock: ... } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const desk = fullDb.products.data.find(p => p.name === 'Desk');
+                    return desk && desk.stock === 20; // Original was 10
+                }
+            },
+            {
+                id: 41, world: 5, collection: "users",
+                title: { id: "Rename Field", en: "Rename Field" },
+                description: { 
+                    id: "Operator `$rename` untuk rename field. Rename `city` menjadi `location` untuk semua users.",
+                    en: "Use `$rename` operator to rename fields. Rename `city` to `location` for all users."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.updateMany({}, { $rename: { city: 'location' } })`",
+                    en: "Use: `db.users.updateMany({}, { $rename: { city: 'location' } })`"
+                },
+                hint: { id: "db.users.updateMany({}, { $rename: { city: 'location' } })", en: "db.users.updateMany({}, { $rename: { city: 'location' } })" },
+                explanation: { 
+                    id: "`$rename` mengubah nama field. Syntax: `{ $rename: { oldName: 'newName' } }`",
+                    en: "`$rename` changes field name. Syntax: `{ $rename: { oldName: 'newName' } }`"
+                },
+                initialCode: "db.users.updateMany(\n  {},\n  { $rename: { city: '...' } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    return fullDb.users.data.every(u => u.location && !u.city);
+                }
+            },
+            {
+                id: 42, world: 5, collection: "users",
+                title: { id: "Set Multiple Fields", en: "Set Multiple Fields" },
+                description: { 
+                    id: "Update multiple fields sekaligus. Set Joko's role='admin' dan age=31.",
+                    en: "Update multiple fields at once. Set Joko's role='admin' and age=31."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.updateOne({ name: 'Joko' }, { $set: { role: 'admin', age: 31 } })`",
+                    en: "Use: `db.users.updateOne({ name: 'Joko' }, { $set: { role: 'admin', age: 31 } })`"
+                },
+                hint: { id: "db.users.updateOne({ name: 'Joko' }, { $set: { role: 'admin', age: 31 } })", en: "db.users.updateOne({ name: 'Joko' }, { $set: { role: 'admin', age: 31 } })" },
+                explanation: { 
+                    id: "`$set` bisa update banyak field sekaligus dalam satu object.",
+                    en: "`$set` can update many fields at once in a single object."
+                },
+                initialCode: "db.users.updateOne(\n  { name: '...' },\n  { $set: { role: '...', age: ... } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const joko = fullDb.users.data.find(u => u.name === 'Joko');
+                    return joko && joko.role === 'admin' && joko.age === 31;
+                }
+            },
+            {
+                id: 43, world: 5, collection: "products",
+                title: { id: "Inc + Set Combo", en: "Inc + Set Combo" },
+                description: { 
+                    id: "Kombinasi operators. Untuk Mouse: price +5 dan set category='accessories'.",
+                    en: "Combine operators. For Mouse: price +5 and set category='accessories'."
+                },
+                instruction: {
+                    id: "Gunakan: `db.products.updateOne({ name: 'Mouse' }, { $inc: { price: 5 }, $set: { category: 'accessories' } })`",
+                    en: "Use: `db.products.updateOne({ name: 'Mouse' }, { $inc: { price: 5 }, $set: { category: 'accessories' } })`"
+                },
+                hint: { id: "db.products.updateOne({ name: 'Mouse' }, { $inc: { price: 5 }, $set: { category: 'accessories' } })", en: "db.products.updateOne({ name: 'Mouse' }, { $inc: { price: 5 }, $set: { category: 'accessories' } })" },
+                explanation: { 
+                    id: "Bisa kombinasi multiple update operators dalam satu update command.",
+                    en: "Can combine multiple update operators in one update command."
+                },
+                initialCode: "db.products.updateOne(\n  { name: '...' },\n  {\n    $inc: { price: ... },\n    $set: { category: '...' }\n  }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const mouse = fullDb.products.data.find(p => p.name === 'Mouse');
+                    return mouse && mouse.price >= 30 && mouse.category === 'accessories';
+                }
+            },
+            {
+                id: 44, world: 5, collection: "users",
+                title: { id: "Negative Increment", en: "Negative Increment" },
+                description: { 
+                    id: "`$inc` bisa decrement dengan negative value. Kurangi salary Rina -500.",
+                    en: "`$inc` can decrement with negative value. Reduce Rina's salary -500."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.updateOne({ name: 'Rina' }, { $inc: { salary: -500 } })`",
+                    en: "Use: `db.users.updateOne({ name: 'Rina' }, { $inc: { salary: -500 } })`"
+                },
+                hint: { id: "db.users.updateOne({ name: 'Rina' }, { $inc: { salary: -500 } })", en: "db.users.updateOne({ name: 'Rina' }, { $inc: { salary: -500 } })" },
+                explanation: { 
+                    id: "Negative increment = decrement. `$inc: { field: -value }` mengurangi nilai field.",
+                    en: "Negative increment = decrement. `$inc: { field: -value }` reduces field value."
+                },
+                initialCode: "db.users.updateOne(\n  { name: '...' },\n  { $inc: { salary: ... } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const rina = fullDb.users.data.find(u => u.name === 'Rina');
+                    return rina && rina.salary === 7000; // Original 7500 - 500
+                }
+            },
+            {
+                id: 45, world: 5, collection: "products",
+                title: { id: "Update Result", en: "Update Result" },
+                description: { 
+                    id: "Update operations return result object. Check matchedCount dan modifiedCount.",
+                    en: "Update operations return result object. Check matchedCount and modifiedCount."
+                },
+                instruction: {
+                    id: "Update Chair stock: `db.products.updateOne({ name: 'Chair' }, { $inc: { stock: 5 } })`",
+                    en: "Update Chair stock: `db.products.updateOne({ name: 'Chair' }, { $inc: { stock: 5 } })`"
+                },
+                hint: { id: "db.products.updateOne({ name: 'Chair' }, { $inc: { stock: 5 } })", en: "db.products.updateOne({ name: 'Chair' }, { $inc: { stock: 5 } })" },
+                explanation: { 
+                    id: "Update result: `{ matchedCount: N, modifiedCount: M }`. Berguna untuk validation.",
+                    en: "Update result: `{ matchedCount: N, modifiedCount: M }`. Useful for validation."
+                },
+                initialCode: "db.products.updateOne(\n  { name: '...' },\n  { $inc: { stock: ... } }\n)",
+                expectedCheck: (res) => res && res.modifiedCount === 1
+            },
+
+            // WORLD 6: THE MODIFIER II (Levels 46-54)
+            {
+                id: 46, world: 6, collection: "users",
+                title: { id: "Push to Array", en: "Push to Array" },
+                description: { 
+                    id: "Operator `$push` untuk add element ke array. Add 'react' ke skills Budi.",
+                    en: "Use `$push` operator to add element to array. Add 'react' to Budi's skills."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.updateOne({ name: 'Budi' }, { $push: { skills: 'react' } })`",
+                    en: "Use: `db.users.updateOne({ name: 'Budi' }, { $push: { skills: 'react' } })`"
+                },
+                hint: { id: "db.users.updateOne({ name: 'Budi' }, { $push: { skills: 'react' } })", en: "db.users.updateOne({ name: 'Budi' }, { $push: { skills: 'react' } })" },
+                explanation: { 
+                    id: "`$push` menambahkan element ke end of array. Bisa duplicate values.",
+                    en: "`$push` adds element to end of array. Can create duplicates."
+                },
+                initialCode: "db.users.updateOne(\n  { name: '...' },\n  { $push: { skills: '...' } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const budi = fullDb.users.data.find(u => u.name === 'Budi');
+                    return budi && budi.skills.includes('react');
+                }
+            },
+            {
+                id: 47, world: 6, collection: "users",
+                title: { id: "AddToSet", en: "AddToSet" },
+                description: { 
+                    id: "Operator `$addToSet` seperti `$push` tapi cegah duplicates. Add 'sql' ke skills Budi (sudah ada).",
+                    en: "Use `$addToSet` like `$push` but prevents duplicates. Add 'sql' to Budi's skills (already exists)."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.updateOne({ name: 'Budi' }, { $addToSet: { skills: 'sql' } })`",
+                    en: "Use: `db.users.updateOne({ name: 'Budi' }, { $addToSet: { skills: 'sql' } })`"
+                },
+                hint: { id: "db.users.updateOne({ name: 'Budi' }, { $addToSet: { skills: 'sql' } })", en: "db.users.updateOne({ name: 'Budi' }, { $addToSet: { skills: 'sql' } })" },
+                explanation: { 
+                    id: "`$addToSet` hanya add jika value belum ada. Tidak create duplicates.",
+                    en: "`$addToSet` only adds if value doesn't exist. Won't create duplicates."
+                },
+                initialCode: "db.users.updateOne(\n  { name: '...' },\n  { $addToSet: { skills: '...' } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const budi = fullDb.users.data.find(u => u.name === 'Budi');
+                    return budi && budi.skills.filter(s => s === 'sql').length === 1;
+                }
+            },
+            {
+                id: 48, world: 6, collection: "users",
+                title: { id: "Pop Array", en: "Pop Array" },
+                description: { 
+                    id: "Operator `$pop` untuk remove element dari array. Remove last skill dari Joko.",
+                    en: "Use `$pop` operator to remove element from array. Remove last skill from Joko."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.updateOne({ name: 'Joko' }, { $pop: { skills: 1 } })` (1=last, -1=first)",
+                    en: "Use: `db.users.updateOne({ name: 'Joko' }, { $pop: { skills: 1 } })` (1=last, -1=first)"
+                },
+                hint: { id: "db.users.updateOne({ name: 'Joko' }, { $pop: { skills: 1 } })", en: "db.users.updateOne({ name: 'Joko' }, { $pop: { skills: 1 } })" },
+                explanation: { 
+                    id: "`$pop: { field: 1 }` remove last element. `$pop: { field: -1 }` remove first element.",
+                    en: "`$pop: { field: 1 }` removes last element. `$pop: { field: -1 }` removes first element."
+                },
+                initialCode: "db.users.updateOne(\n  { name: '...' },\n  { $pop: { skills: ... } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const joko = fullDb.users.data.find(u => u.name === 'Joko');
+                    return joko && joko.skills.length === 1; // Originally ['python', 'sql']
+                }
+            },
+            {
+                id: 49, world: 6, collection: "users",
+                title: { id: "Pull Specific Value", en: "Pull Specific Value" },
+                description: { 
+                    id: "Operator `$pull` untuk remove specific value dari array. Remove 'design' dari Siti's skills.",
+                    en: "Use `$pull` operator to remove specific value from array. Remove 'design' from Siti's skills."
+                },
+                instruction: {
+                    id: "Gunakan: `db.users.updateOne({ name: 'Siti' }, { $pull: { skills: 'design' } })`",
+                    en: "Use: `db.users.updateOne({ name: 'Siti' }, { $pull: { skills: 'design' } })`"
+                },
+                hint: { id: "db.users.updateOne({ name: 'Siti' }, { $pull: { skills: 'design' } })", en: "db.users.updateOne({ name: 'Siti' }, { $pull: { skills: 'design' } })" },
+                explanation: { 
+                    id: "`$pull` remove SEMUA occurrences of value dari array. Berbeda dari `$pop` (by position).",
+                    en: "`$pull` removes ALL occurrences of value from array. Different from `$pop` (by position)."
+                },
+                initialCode: "db.users.updateOne(\n  { name: '...' },\n  { $pull: { skills: '...' } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const siti = fullDb.users.data.find(u => u.name === 'Siti');
+                    return siti && !siti.skills.includes('design');
+                }
+            },
+            {
+                id: 50, world: 6, collection: "products",
+                title: { id: "Push Multiple", en: "Push Multiple" },
+                description: { 
+                    id: "Push multiple values sekaligus. Add tags 'popular' dan 'sale' ke Laptop.",
+                    en: "Push multiple values at once. Add tags 'popular' and 'sale' to Laptop."
+                },
+                instruction: {
+                    id: "Gunakan: `db.products.updateOne({ name: 'Laptop' }, { $push: { tags: { $each: ['popular', 'sale'] } } })`",
+                    en: "Use: `db.products.updateOne({ name: 'Laptop' }, { $push: { tags: { $each: ['popular', 'sale'] } } })`"
+                },
+                hint: { id: "db.products.updateOne({ name: 'Laptop' }, { $push: { tags: { $each: ['popular', 'sale'] } } })", en: "db.products.updateOne({ name: 'Laptop' }, { $push: { tags: { $each: ['popular', 'sale'] } } })" },
+                explanation: { 
+                    id: "`$each` modifier untuk push multiple values. Syntax: `{ $push: { field: { $each: [v1, v2] } } }`",
+                    en: "`$each` modifier to push multiple values. Syntax: `{ $push: { field: { $each: [v1, v2] } } }`"
+                },
+                initialCode: "db.products.updateOne(\n  { name: '...' },\n  {\n    $push: {\n      tags: { $each: ['...', '...'] }\n    }\n  }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const laptop = fullDb.products.data.find(p => p.name === 'Laptop');
+                    return laptop && laptop.tags.includes('popular') && laptop.tags.includes('sale');
+                }
+            },
+            {
+                id: 51, world: 6, collection: "blogs",
+                title: { id: "Push Object to Array", en: "Push Object to Array" },
+                description: { 
+                    id: "Array bisa berisi objects. Add new comment ke blog 'Design Patterns'.",
+                    en: "Arrays can contain objects. Add new comment to 'Design Patterns' blog."
+                },
+                instruction: {
+                    id: "Push: `{ user: 'Joko', text: 'Insightful!' }` ke comments array",
+                    en: "Push: `{ user: 'Joko', text: 'Insightful!' }` to comments array"
+                },
+                hint: { id: "db.blogs.updateOne({ title: 'Design Patterns' }, { $push: { comments: { user: 'Joko', text: 'Insightful!' } } })", en: "db.blogs.updateOne({ title: 'Design Patterns' }, { $push: { comments: { user: 'Joko', text: 'Insightful!' } } })" },
+                explanation: { 
+                    id: "`$push` works dengan any data type termasuk objects. Common pattern untuk embedded documents.",
+                    en: "`$push` works with any data type including objects. Common pattern for embedded documents."
+                },
+                initialCode: "db.blogs.updateOne(\n  { title: '...' },\n  {\n    $push: {\n      comments: { user: '...', text: '...' }\n    }\n  }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const blog = fullDb.blogs.data.find(b => b.title === 'Design Patterns');
+                    return blog && blog.comments.some(c => c.user === 'Joko');
+                }
+            },
+            {
+                id: 52, world: 6, collection: "users",
+                title: { id: "Pull with Condition", en: "Pull with Condition" },
+                description: { 
+                    id: "Advanced: `$pull` bisa gunakan query condition untuk complex removal.",
+                    en: "Advanced: `$pull` can use query conditions for complex removals."
+                },
+                instruction: {
+                    id: "Untuk level ini, cukup pull 'js' dari Rina: `db.users.updateOne({ name: 'Rina' }, { $pull: { skills: 'js' } })`",
+                    en: "For this level, just pull 'js' from Rina: `db.users.updateOne({ name: 'Rina' }, { $pull: { skills: 'js' } })`"
+                },
+                hint: { id: "db.users.updateOne({ name: 'Rina' }, { $pull: { skills: 'js' } })", en: "db.users.updateOne({ name: 'Rina' }, { $pull: { skills: 'js' } })" },
+                explanation: { 
+                    id: "`$pull` sangat powerful - bisa remove berdasarkan equality atau complex query.",
+                    en: "`$pull` is very powerful - can remove based on equality or complex queries."
+                },
+                initialCode: "db.users.updateOne(\n  { name: '...' },\n  { $pull: { skills: '...' } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const rina = fullDb.users.data.find(u => u.name === 'Rina');
+                    return rina && !rina.skills.includes('js');
+                }
+            },
+            {
+                id: 53, world: 6, collection: "products",
+                title: { id: "Array Update Combo", en: "Array Update Combo" },
+                description: { 
+                    id: "Kombinasi array operators. Untuk Mouse: push tag 'wireless' dan inc price 10.",
+                    en: "Combine array operators. For Mouse: push tag 'wireless' and inc price 10."
+                },
+                instruction: {
+                    id: "Kombinasi `$push` dan `$inc`: `db.products.updateOne({ name: 'Mouse' }, { $push: { tags: 'wireless' }, $inc: { price: 10 } })`",
+                    en: "Combine `$push` and `$inc`: `db.products.updateOne({ name: 'Mouse' }, { $push: { tags: 'wireless' }, $inc: { price: 10 } })`"
+                },
+                hint: { id: "db.products.updateOne({ name: 'Mouse' }, { $push: { tags: 'wireless' }, $inc: { price: 10 } })", en: "db.products.updateOne({ name: 'Mouse' }, { $push: { tags: 'wireless' }, $inc: { price: 10 } })" },
+                explanation: { 
+                    id: "Multiple update operators bisa digabung untuk atomic updates complex.",
+                    en: "Multiple update operators can be combined for complex atomic updates."
+                },
+                initialCode: "db.products.updateOne(\n  { name: '...' },\n  {\n    $push: { tags: '...' },\n    $inc: { price: ... }\n  }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const mouse = fullDb.products.data.find(p => p.name === 'Mouse');
+                    return mouse && mouse.tags.includes('wireless');
+                }
+            },
+            {
+                id: 54, world: 6, collection: "blogs",
+                title: { id: "Array Update Many", en: "Array Update Many" },
+                description: { 
+                    id: "Update arrays di multiple documents. Add tag 'featured' ke semua blogs dengan views > 150.",
+                    en: "Update arrays in multiple documents. Add tag 'featured' to all blogs with views > 150."
+                },
+                instruction: {
+                    id: "Gunakan: `db.blogs.updateMany({ views: { $gt: 150 } }, { $addToSet: { tags: 'featured' } })`",
+                    en: "Use: `db.blogs.updateMany({ views: { $gt: 150 } }, { $addToSet: { tags: 'featured' } })`"
+                },
+                hint: { id: "db.blogs.updateMany({ views: { $gt: 150 } }, { $addToSet: { tags: 'featured' } })", en: "db.blogs.updateMany({ views: { $gt: 150 } }, { $addToSet: { tags: 'featured' } })" },
+                explanation: { 
+                    id: "`updateMany` + array operators untuk bulk array updates. Sangat efficient.",
+                    en: "`updateMany` + array operators for bulk array updates. Very efficient."
+                },
+                initialCode: "db.blogs.updateMany(\n  { views: { $gt: ... } },\n  { $addToSet: { tags: '...' } }\n)",
+                expectedCheck: (res, fullDb) => {
+                    const featured = fullDb.blogs.data.filter(b => b.views > 150);
+                    return featured.length >= 2 && featured.every(b => b.tags.includes('featured'));
+                }
+            },
+
+            // WORLD 7: THE AGGREGATOR I (Levels 55-63)
+            {
+                id: 55, world: 7, collection: "users",
+                title: { id: "Aggregation Intro", en: "Aggregation Intro" },
+                description: { 
+                    id: "**Aggregation Pipeline** = sequence of stages untuk transform data. Mulai dengan `$match`.",
+                    en: "**Aggregation Pipeline** = sequence of stages to transform data. Start with `$match`."
+                },
+                instruction: {
+                    id: "Match admins: `db.users.aggregate([{ $match: { role: 'admin' } }])`",
+                    en: "Match admins: `db.users.aggregate([{ $match: { role: 'admin' } }])`"
+                },
+                hint: { id: "db.users.aggregate([{ $match: { role: 'admin' } }])", en: "db.users.aggregate([{ $match: { role: 'admin' } }])" },
+                explanation: { 
+                    id: "`aggregate()` takes array of stages. `$match` = filter (seperti find query).",
+                    en: "`aggregate()` takes array of stages. `$match` = filter (like find query)."
+                },
+                initialCode: "db.users.aggregate([\n  { $match: { role: '...' } }\n])",
+                expectedCheck: (res) => res.length === 2 && res.every(u => u.role === 'admin')
+            },
+            {
+                id: 56, world: 7, collection: "users",
+                title: { id: "Project Stage", en: "Project Stage" },
+                description: { 
+                    id: "Stage `$project` untuk reshape documents - pilih fields atau compute new fields.",
+                    en: "Use `$project` stage to reshape documents - select fields or compute new fields."
+                },
+                instruction: {
+                    id: "Project hanya name dan age: `db.users.aggregate([{ $project: { name: 1, age: 1 } }])`",
+                    en: "Project only name and age: `db.users.aggregate([{ $project: { name: 1, age: 1 } }])`"
+                },
+                hint: { id: "db.users.aggregate([{ $project: { name: 1, age: 1 } }])", en: "db.users.aggregate([{ $project: { name: 1, age: 1 } }])" },
+                explanation: { 
+                    id: "`$project` mirip projection di find, tapi lebih powerful - bisa create computed fields.",
+                    en: "`$project` is like projection in find, but more powerful - can create computed fields."
+                },
+                initialCode: "db.users.aggregate([\n  { $project: { name: 1, age: ... } }\n])",
+                expectedCheck: (res) => res.length > 0 && res.every(u => u.name && u.age && !u.role)
+            },
+            {
+                id: 57, world: 7, collection: "users",
+                title: { id: "Match + Project", en: "Match + Project" },
+                description: { 
+                    id: "Kombinasi stages: filter dulu, lalu reshape. Get admins, show only name and salary.",
+                    en: "Combine stages: filter first, then reshape. Get admins, show only name and salary."
+                },
+                instruction: {
+                    id: "Pipeline: `[{ $match: { role: 'admin' } }, { $project: { name: 1, salary: 1 } }]`",
+                    en: "Pipeline: `[{ $match: { role: 'admin' } }, { $project: { name: 1, salary: 1 } }]`"
+                },
+                hint: { id: "db.users.aggregate([{ $match: { role: 'admin' } }, { $project: { name: 1, salary: 1 } }])", en: "db.users.aggregate([{ $match: { role: 'admin' } }, { $project: { name: 1, salary: 1 } }])" },
+                explanation: { 
+                    id: "Pipeline stages executed in order. Output of one stage = input of next stage.",
+                    en: "Pipeline stages executed in order. Output of one stage = input of next stage."
+                },
+                initialCode: "db.users.aggregate([\n  { $match: { role: '...' } },\n  { $project: { name: 1, salary: ... } }\n])",
+                expectedCheck: (res) => res.length === 2 && res.every(u => u.name && u.salary && !u.role)
+            },
+            {
+                id: 58, world: 7, collection: "products",
+                title: { id: "Limit Stage", en: "Limit Stage" },
+                description: { 
+                    id: "Stage `$limit` untuk ambil N documents pertama.",
+                    en: "Use `$limit` stage to get first N documents."
+                },
+                instruction: {
+                    id: "Get 2 products termurah: `[{ $sort: { price: 1 } }, { $limit: 2 }]`",
+                    en: "Get 2 cheapest products: `[{ $sort: { price: 1 } }, { $limit: 2 }]`"
+                },
+                hint: { id: "db.products.aggregate([{ $sort: { price: 1 } }, { $limit: 2 }])", en: "db.products.aggregate([{ $sort: { price: 1 } }, { $limit: 2 }])" },
+                explanation: { 
+                    id: "`$sort: { field: 1 }` = ascending, `-1` = descending. `$limit: N` ambil N docs.",
+                    en: "`$sort: { field: 1 }` = ascending, `-1` = descending. `$limit: N` takes N docs."
+                },
+                initialCode: "db.products.aggregate([\n  { $sort: { price: ... } },\n  { $limit: ... }\n])",
+                expectedCheck: (res) => res.length === 2 && res[0].price <= res[1].price
+            },
+            {
+                id: 59, world: 7, collection: "products",
+                title: { id: "Skip Stage", en: "Skip Stage" },
+                description: { 
+                    id: "Stage `$skip` untuk skip N documents pertama. Berguna untuk pagination.",
+                    en: "Use `$skip` stage to skip first N documents. Useful for pagination."
+                },
+                instruction: {
+                    id: "Skip 2 products termurah, ambil sisanya: `[{ $sort: { price: 1 } }, { $skip: 2 }]`",
+                    en: "Skip 2 cheapest products, get the rest: `[{ $sort: { price: 1 } }, { $skip: 2 }]`"
+                },
+                hint: { id: "db.products.aggregate([{ $sort: { price: 1 } }, { $skip: 2 }])", en: "db.products.aggregate([{ $sort: { price: 1 } }, { $skip: 2 }])" },
+                explanation: { 
+                    id: "`$skip` + `$limit` untuk pagination: skip=(page-1)*size, limit=size.",
+                    en: "`$skip` + `$limit` for pagination: skip=(page-1)*size, limit=size."
+                },
+                initialCode: "db.products.aggregate([\n  { $sort: { price: ... } },\n  { $skip: ... }\n])",
+                expectedCheck: (res) => res.length === 2
+            },
+            {
+                id: 60, world: 7, collection: "users",
+                title: { id: "Computed Fields", en: "Computed Fields" },
+                description: { 
+                    id: "Create new field dalam `$project`. Add field `salaryInK` = salary dibagi 1000.",
+                    en: "Create new field in `$project`. Add field `salaryInK` = salary divided by 1000."
+                },
+                instruction: {
+                    id: "Note: Our MiniMongo simple, jadi manual: tampilkan name dan hardcode salaryInK untuk demo.",
+                    en: "Note: Our MiniMongo is simple, so manual: show name and hardcode salaryInK for demo."
+                },
+                hint: { id: "db.users.aggregate([{ $project: { name: 1, age: 1 } }])", en: "db.users.aggregate([{ $project: { name: 1, age: 1 } }])" },
+                explanation: { 
+                    id: "Dalam real MongoDB, bisa: `{ $project: { name: 1, salaryInK: { $divide: ['$salary', 1000] } } }`",
+                    en: "In real MongoDB, can do: `{ $project: { name: 1, salaryInK: { $divide: ['$salary', 1000] } } }`"
+                },
+                initialCode: "db.users.aggregate([\n  { $project: { name: 1, age: 1 } }\n])",
+                expectedCheck: (res) => res.length > 0 && res.every(u => u.name && u.age)
+            },
+            {
+                id: 61, world: 7, collection: "blogs",
+                title: { id: "Sort Descending", en: "Sort Descending" },
+                description: { 
+                    id: "Sort blogs by views descending (terbanyak dulu).",
+                    en: "Sort blogs by views descending (most views first)."
+                },
+                instruction: {
+                    id: "Sort: `db.blogs.aggregate([{ $sort: { views: -1 } }])`",
+                    en: "Sort: `db.blogs.aggregate([{ $sort: { views: -1 } }])`"
+                },
+                hint: { id: "db.blogs.aggregate([{ $sort: { views: -1 } }])", en: "db.blogs.aggregate([{ $sort: { views: -1 } }])" },
+                explanation: { 
+                    id: "`$sort: { field: -1 }` untuk descending order. 1 = ascending.",
+                    en: "`$sort: { field: -1 }` for descending order. 1 = ascending."
+                },
+                initialCode: "db.blogs.aggregate([\n  { $sort: { views: ... } }\n])",
+                expectedCheck: (res) => res.length === 3 && res[0].views >= res[1].views
+            },
+            {
+                id: 62, world: 7, collection: "orders",
+                title: { id: "Complex Pipeline", en: "Complex Pipeline" },
+                description: { 
+                    id: "Multi-stage pipeline: Filter shipped orders, sort by total desc, limit 2.",
+                    en: "Multi-stage pipeline: Filter shipped orders, sort by total desc, limit 2."
+                },
+                instruction: {
+                    id: "Pipeline: match shipped → sort by total -1 → limit 2",
+                    en: "Pipeline: match shipped → sort by total -1 → limit 2"
+                },
+                hint: { id: "db.orders.aggregate([{ $match: { status: 'shipped' } }, { $sort: { total: -1 } }, { $limit: 2 }])", en: "db.orders.aggregate([{ $match: { status: 'shipped' } }, { $sort: { total: -1 } }, { $limit: 2 }])" },
+                explanation: { 
+                    id: "Pipeline power: chain multiple transformations untuk complex queries.",
+                    en: "Pipeline power: chain multiple transformations for complex queries."
+                },
+                initialCode: "db.orders.aggregate([\n  { $match: { status: '...' } },\n  { $sort: { total: ... } },\n  { $limit: ... }\n])",
+                expectedCheck: (res) => res.length === 2 && res.every(o => o.status === 'shipped')
+            },
+            {
+                id: 63, world: 7, collection: "products",
+                title: { id: "Project Exclusion", en: "Project Exclusion" },
+                description: { 
+                    id: "Dalam `$project`, bisa exclude fields dengan 0.",
+                    en: "In `$project`, can exclude fields with 0."
+                },
+                instruction: {
+                    id: "Get electronics, exclude stock field: match → project (stock: 0)",
+                    en: "Get electronics, exclude stock field: match → project (stock: 0)"
+                },
+                hint: { id: "db.products.aggregate([{ $match: { category: 'electronics' } }, { $project: { stock: 0 } }])", en: "db.products.aggregate([{ $match: { category: 'electronics' } }, { $project: { stock: 0 } }])" },
+                explanation: { 
+                    id: "Project dengan 0 = exclude. Dengan 1 = include. Tidak bisa mix (except _id).",
+                    en: "Project with 0 = exclude. With 1 = include. Can't mix (except _id)."
+                },
+                initialCode: "db.products.aggregate([\n  { $match: { category: '...' } },\n  { $project: { stock: ... } }\n])",
+                expectedCheck: (res) => res.length === 2 && res.every(p => p.stock === undefined)
+            },
+
+            // WORLD 8: THE AGGREGATOR II (Levels 64-72)
+            {
+                id: 64, world: 8, collection: "users",
+                title: { id: "Group Intro", en: "Group Intro" },
+                description: { 
+                    id: "Stage `$group` untuk aggregate data. Count users by role.",
+                    en: "Use `$group` stage to aggregate data. Count users by role."
+                },
+                instruction: {
+                    id: "Group by role, count: `[{ $group: { _id: '$role', count: { $sum: 1 } } }]`",
+                    en: "Group by role, count: `[{ $group: { _id: '$role', count: { $sum: 1 } } }]`"
+                },
+                hint: { id: "db.users.aggregate([{ $group: { _id: '$role', count: { $sum: 1 } } }])", en: "db.users.aggregate([{ $group: { _id: '$role', count: { $sum: 1 } } }])" },
+                explanation: { 
+                    id: "`$group` grouping key = `_id` field. Accumulators: `$sum`, `$avg`, `$min`, `$max`, dll.",
+                    en: "`$group` grouping key = `_id` field. Accumulators: `$sum`, `$avg`, `$min`, `$max`, etc."
+                },
+                initialCode: "db.users.aggregate([\n  {\n    $group: {\n      _id: '$...',\n      count: { $sum: ... }\n    }\n  }\n])",
+                expectedCheck: (res) => res.length === 2 && res.some(g => g._id === 'admin')
+            },
+            {
+                id: 65, world: 8, collection: "users",
+                title: { id: "Sum Accumulator", en: "Sum Accumulator" },
+                description: { 
+                    id: "Accumulator `$sum` bisa sum field values. Total salary by role.",
+                    en: "Use `$sum` accumulator to sum field values. Total salary by role."
+                },
+                instruction: {
+                    id: "Group by role, sum salary: `[{ $group: { _id: '$role', totalSalary: { $sum: '$salary' } } }]`",
+                    en: "Group by role, sum salary: `[{ $group: { _id: '$role', totalSalary: { $sum: '$salary' } } }]`"
+                },
+                hint: { id: "db.users.aggregate([{ $group: { _id: '$role', totalSalary: { $sum: '$salary' } } }])", en: "db.users.aggregate([{ $group: { _id: '$role', totalSalary: { $sum: '$salary' } } }])" },
+                explanation: { 
+                    id: "`$sum: '$field'` untuk sum field values. `$sum: 1` untuk count documents.",
+                    en: "`$sum: '$field'` to sum field values. `$sum: 1` to count documents."
+                },
+                initialCode: "db.users.aggregate([\n  {\n    $group: {\n      _id: '$...',\n      totalSalary: { $sum: '$...' }\n    }\n  }\n])",
+                expectedCheck: (res) => res.length === 2 && res.every(g => g.totalSalary > 0)
+            },
+            {
+                id: 66, world: 8, collection: "users",
+                title: { id: "Average", en: "Average" },
+                description: { 
+                    id: "Accumulator `$avg` untuk average. Average age by role.",
+                    en: "Use `$avg` accumulator for average. Average age by role."
+                },
+                instruction: {
+                    id: "Group by role, avg age: `[{ $group: { _id: '$role', avgAge: { $avg: '$age' } } }]`",
+                    en: "Group by role, avg age: `[{ $group: { _id: '$role', avgAge: { $avg: '$age' } } }]`"
+                },
+                hint: { id: "db.users.aggregate([{ $group: { _id: '$role', avgAge: { $avg: '$age' } } }])", en: "db.users.aggregate([{ $group: { _id: '$role', avgAge: { $avg: '$age' } } }])" },
+                explanation: { 
+                    id: "`$avg: '$field'` computes arithmetic mean untuk grouped values.",
+                    en: "`$avg: '$field'` computes arithmetic mean for grouped values."
+                },
+                initialCode: "db.users.aggregate([\n  {\n    $group: {\n      _id: '$...',\n      avgAge: { $avg: '$...' }\n    }\n  }\n])",
+                expectedCheck: (res) => res.length === 2 && res.every(g => g.avgAge > 0)
+            },
+            {
+                id: 67, world: 8, collection: "users",
+                title: { id: "Min and Max", en: "Min and Max" },
+                description: { 
+                    id: "Accumulators `$min` dan `$max`. Find min and max age per role.",
+                    en: "Use `$min` and `$max` accumulators. Find min and max age per role."
+                },
+                instruction: {
+                    id: "Group by role, min & max age: `[{ $group: { _id: '$role', minAge: { $min: '$age' }, maxAge: { $max: '$age' } } }]`",
+                    en: "Group by role, min & max age: `[{ $group: { _id: '$role', minAge: { $min: '$age' }, maxAge: { $max: '$age' } } }]`"
+                },
+                hint: { id: "db.users.aggregate([{ $group: { _id: '$role', minAge: { $min: '$age' }, maxAge: { $max: '$age' } } }])", en: "db.users.aggregate([{ $group: { _id: '$role', minAge: { $min: '$age' }, maxAge: { $max: '$age' } } }])" },
+                explanation: { 
+                    id: "`$min` dan `$max` find minimum dan maximum values dalam group.",
+                    en: "`$min` and `$max` find minimum and maximum values in group."
+                },
+                initialCode: "db.users.aggregate([\n  {\n    $group: {\n      _id: '$...',\n      minAge: { $min: '$...' },\n      maxAge: { $max: '$...' }\n    }\n  }\n])",
+                expectedCheck: (res) => res.length === 2 && res.every(g => g.minAge && g.maxAge)
+            },
+            {
+                id: 68, world: 8, collection: "products",
+                title: { id: "Group by Category", en: "Group by Category" },
+                description: { 
+                    id: "Count products dan average price per category.",
+                    en: "Count products and average price per category."
+                },
+                instruction: {
+                    id: "Group by category, count dan avgPrice: `[{ $group: { _id: '$category', count: { $sum: 1 }, avgPrice: { $avg: '$price' } } }]`",
+                    en: "Group by category, count and avgPrice: `[{ $group: { _id: '$category', count: { $sum: 1 }, avgPrice: { $avg: '$price' } } }]`"
+                },
+                hint: { id: "db.products.aggregate([{ $group: { _id: '$category', count: { $sum: 1 }, avgPrice: { $avg: '$price' } } }])", en: "db.products.aggregate([{ $group: { _id: '$category', count: { $sum: 1 }, avgPrice: { $avg: '$price' } } }])" },
+                explanation: { 
+                    id: "Multiple accumulators dalam satu `$group` untuk comprehensive stats.",
+                    en: "Multiple accumulators in one `$group` for comprehensive stats."
+                },
+                initialCode: "db.products.aggregate([\n  {\n    $group: {\n      _id: '$...',\n      count: { $sum: ... },\n      avgPrice: { $avg: '$...' }\n    }\n  }\n])",
+                expectedCheck: (res) => res.length === 2 && res.every(g => g.count && g.avgPrice)
+            },
+            {
+                id: 69, world: 8, collection: "orders",
+                title: { id: "Group Total Sales", en: "Group Total Sales" },
+                description: { 
+                    id: "Total sales by status. Group orders by status, sum total.",
+                    en: "Total sales by status. Group orders by status, sum total."
+                },
+                instruction: {
+                    id: "Group by status, sum total: `[{ $group: { _id: '$status', totalSales: { $sum: '$total' } } }]`",
+                    en: "Group by status, sum total: `[{ $group: { _id: '$status', totalSales: { $sum: '$total' } } }]`"
+                },
+                hint: { id: "db.orders.aggregate([{ $group: { _id: '$status', totalSales: { $sum: '$total' } } }])", en: "db.orders.aggregate([{ $group: { _id: '$status', totalSales: { $sum: '$total' } } }])" },
+                explanation: { 
+                    id: "Business metrics: total sales, revenue, counts per category - all with `$group`.",
+                    en: "Business metrics: total sales, revenue, counts per category - all with `$group`."
+                },
+                initialCode: "db.orders.aggregate([\n  {\n    $group: {\n      _id: '$...',\n      totalSales: { $sum: '$...' }\n    }\n  }\n])",
+                expectedCheck: (res) => res.length >= 2 && res.every(g => g.totalSales > 0)
+            },
+            {
+                id: 70, world: 8, collection: "orders",
+                title: { id: "Match Before Group", en: "Match Before Group" },
+                description: { 
+                    id: "Filter dulu, lalu group. Total shipped orders per user.",
+                    en: "Filter first, then group. Total shipped orders per user."
+                },
+                instruction: {
+                    id: "Pipeline: match shipped → group by userId, sum total",
+                    en: "Pipeline: match shipped → group by userId, sum total"
+                },
+                hint: { id: "db.orders.aggregate([{ $match: { status: 'shipped' } }, { $group: { _id: '$userId', total: { $sum: '$total' } } }])", en: "db.orders.aggregate([{ $match: { status: 'shipped' } }, { $group: { _id: '$userId', total: { $sum: '$total' } } }])" },
+                explanation: { 
+                    id: "Order matters: `$match` sebelum `$group` filter input data untuk grouping.",
+                    en: "Order matters: `$match` before `$group` filters input data for grouping."
+                },
+                initialCode: "db.orders.aggregate([\n  { $match: { status: '...' } },\n  {\n    $group: {\n      _id: '$...',\n      total: { $sum: '$...' }\n    }\n  }\n])",
+                expectedCheck: (res) => res.length >= 1 && res.every(g => g.total > 0)
+            },
+            {
+                id: 71, world: 8, collection: "blogs",
+                title: { id: "First and Last", en: "First and Last" },
+                description: { 
+                    id: "Accumulators `$first` dan `$last` untuk first/last values dalam group.",
+                    en: "Use `$first` and `$last` accumulators for first/last values in group."
+                },
+                instruction: {
+                    id: "Group semua blogs (_id: null), get first dan last title: `[{ $group: { _id: null, firstTitle: { $first: '$title' }, lastTitle: { $last: '$title' } } }]`",
+                    en: "Group all blogs (_id: null), get first and last title: `[{ $group: { _id: null, firstTitle: { $first: '$title' }, lastTitle: { $last: '$title' } } }]`"
+                },
+                hint: { id: "db.blogs.aggregate([{ $group: { _id: null, firstTitle: { $first: '$title' }, lastTitle: { $last: '$title' } } }])", en: "db.blogs.aggregate([{ $group: { _id: null, firstTitle: { $first: '$title' }, lastTitle: { $last: '$title' } } }])" },
+                explanation: { 
+                    id: "`_id: null` group semua documents into one group. Berguna untuk global aggregations.",
+                    en: "`_id: null` groups all documents into one group. Useful for global aggregations."
+                },
+                initialCode: "db.blogs.aggregate([\n  {\n    $group: {\n      _id: null,\n      firstTitle: { $first: '$...' },\n      lastTitle: { $last: '$...' }\n    }\n  }\n])",
+                expectedCheck: (res) => res.length === 1 && res[0].firstTitle && res[0].lastTitle
+            },
+            {
+                id: 72, world: 8, collection: "blogs",
+                title: { id: "Push Accumulator", en: "Push Accumulator" },
+                description: { 
+                    id: "Accumulator `$push` untuk collect values into array. Get all titles as array.",
+                    en: "Use `$push` accumulator to collect values into array. Get all titles as array."
+                },
+                instruction: {
+                    id: "Group all, push titles: `[{ $group: { _id: null, allTitles: { $push: '$title' } } }]`",
+                    en: "Group all, push titles: `[{ $group: { _id: null, allTitles: { $push: '$title' } } }]`"
+                },
+                hint: { id: "db.blogs.aggregate([{ $group: { _id: null, allTitles: { $push: '$title' } } }])", en: "db.blogs.aggregate([{ $group: { _id: null, allTitles: { $push: '$title' } } }])" },
+                explanation: { 
+                    id: "`$push` dalam `$group` creates array dari field values. Berguna untuk collecting data.",
+                    en: "`$push` in `$group` creates array from field values. Useful for collecting data."
+                },
+                initialCode: "db.blogs.aggregate([\n  {\n    $group: {\n      _id: null,\n      allTitles: { $push: '$...' }\n    }\n  }\n])",
+                expectedCheck: (res) => res.length === 1 && Array.isArray(res[0].allTitles) && res[0].allTitles.length === 3
+            },
+
+            // WORLD 9: THE AGGREGATOR III (Levels 73-81)
+            {
+                id: 73, world: 9, collection: "users",
+                title: { id: "Unwind Array", en: "Unwind Array" },
+                description: { 
+                    id: "Stage `$unwind` untuk deconstruct array field - create document per array element.",
+                    en: "Use `$unwind` stage to deconstruct array field - create document per array element."
+                },
+                instruction: {
+                    id: "Unwind skills: `db.users.aggregate([{ $unwind: '$skills' }])`",
+                    en: "Unwind skills: `db.users.aggregate([{ $unwind: '$skills' }])`"
+                },
+                hint: { id: "db.users.aggregate([{ $unwind: '$skills' }])", en: "db.users.aggregate([{ $unwind: '$skills' }])" },
+                explanation: { 
+                    id: "`$unwind` separates array ke individual documents. User dengan 3 skills → 3 documents.",
+                    en: "`$unwind` separates array into individual documents. User with 3 skills → 3 documents."
+                },
+                initialCode: "db.users.aggregate([\n  { $unwind: '$...' }\n])",
+                expectedCheck: (res) => res.length >= 6 && res.every(u => typeof u.skills === 'string')
+            },
+            {
+                id: 74, world: 9, collection: "users",
+                title: { id: "Group After Unwind", en: "Group After Unwind" },
+                description: { 
+                    id: "Unwind skills, lalu group untuk count: berapa user per skill?",
+                    en: "Unwind skills, then group to count: how many users per skill?"
+                },
+                instruction: {
+                    id: "Pipeline: unwind skills → group by skill, count: `[{ $unwind: '$skills' }, { $group: { _id: '$skills', userCount: { $sum: 1 } } }]`",
+                    en: "Pipeline: unwind skills → group by skill, count: `[{ $unwind: '$skills' }, { $group: { _id: '$skills', userCount: { $sum: 1 } } }]`"
+                },
+                hint: { id: "db.users.aggregate([{ $unwind: '$skills' }, { $group: { _id: '$skills', userCount: { $sum: 1 } } }])", en: "db.users.aggregate([{ $unwind: '$skills' }, { $group: { _id: '$skills', userCount: { $sum: 1 } } }])" },
+                explanation: { 
+                    id: "`$unwind` + `$group` = powerful pattern untuk array analysis.",
+                    en: "`$unwind` + `$group` = powerful pattern for array analysis."
+                },
+                initialCode: "db.users.aggregate([\n  { $unwind: '$...' },\n  {\n    $group: {\n      _id: '$...',\n      userCount: { $sum: ... }\n    }\n  }\n])",
+                expectedCheck: (res) => res.length >= 3 && res.every(g => g.userCount > 0)
+            },
+            {
+                id: 75, world: 9, collection: "products",
+                title: { id: "Sort After Group", en: "Sort After Group" },
+                description: { 
+                    id: "Group products by category with counts, lalu sort by count descending.",
+                    en: "Group products by category with counts, then sort by count descending."
+                },
+                instruction: {
+                    id: "Pipeline: group by category, count → sort by count -1",
+                    en: "Pipeline: group by category, count → sort by count -1"
+                },
+                hint: { id: "db.products.aggregate([{ $group: { _id: '$category', count: { $sum: 1 } } }, { $sort: { count: -1 } }])", en: "db.products.aggregate([{ $group: { _id: '$category', count: { $sum: 1 } } }, { $sort: { count: -1 } }])" },
+                explanation: { 
+                    id: "`$sort` setelah `$group` untuk sort aggregated results. Common pattern untuk rankings.",
+                    en: "`$sort` after `$group` to sort aggregated results. Common pattern for rankings."
+                },
+                initialCode: "db.products.aggregate([\n  {\n    $group: {\n      _id: '$...',\n      count: { $sum: ... }\n    }\n  },\n  { $sort: { count: ... } }\n])",
+                expectedCheck: (res) => res.length === 2 && res[0].count >= res[1].count
+            },
+            {
+                id: 76, world: 9, collection: "blogs",
+                title: { id: "Unwind Comments", en: "Unwind Comments" },
+                description: { 
+                    id: "Unwind comments array (array of objects). Setiap comment jadi separate document.",
+                    en: "Unwind comments array (array of objects). Each comment becomes separate document."
+                },
+                instruction: {
+                    id: "Unwind comments: `db.blogs.aggregate([{ $unwind: '$comments' }])`",
+                    en: "Unwind comments: `db.blogs.aggregate([{ $unwind: '$comments' }])`"
+                },
+                hint: { id: "db.blogs.aggregate([{ $unwind: '$comments' }])", en: "db.blogs.aggregate([{ $unwind: '$comments' }])" },
+                explanation: { 
+                    id: "`$unwind` works dengan array of objects too. Nested object becomes top-level in unwound doc.",
+                    en: "`$unwind` works with array of objects too. Nested object becomes top-level in unwound doc."
+                },
+                initialCode: "db.blogs.aggregate([\n  { $unwind: '$...' }\n])",
+                expectedCheck: (res) => res.length === 3 && res.every(b => b.comments && b.comments.user)
+            },
+            {
+                id: 77, world: 9, collection: "blogs",
+                title: { id: "Comments by User", en: "Comments by User" },
+                description: { 
+                    id: "Unwind comments, lalu group by commenter untuk count comments per user.",
+                    en: "Unwind comments, then group by commenter to count comments per user."
+                },
+                instruction: {
+                    id: "Pipeline: unwind comments → group by comments.user, count",
+                    en: "Pipeline: unwind comments → group by comments.user, count"
+                },
+                hint: { id: "db.blogs.aggregate([{ $unwind: '$comments' }, { $group: { _id: '$comments.user', commentCount: { $sum: 1 } } }])", en: "db.blogs.aggregate([{ $unwind: '$comments' }, { $group: { _id: '$comments.user', commentCount: { $sum: 1 } } }])" },
+                explanation: { 
+                    id: "Setelah `$unwind`, nested fields bisa di-access dengan dot notation untuk grouping.",
+                    en: "After `$unwind`, nested fields can be accessed with dot notation for grouping."
+                },
+                initialCode: "db.blogs.aggregate([\n  { $unwind: '$...' },\n  {\n    $group: {\n      _id: '$comments...',\n      commentCount: { $sum: ... }\n    }\n  }\n])",
+                expectedCheck: (res) => res.length >= 2 && res.every(g => g.commentCount > 0)
+            },
+            {
+                id: 78, world: 9, collection: "orders",
+                title: { id: "Multi-Stage Complex", en: "Multi-Stage Complex" },
+                description: { 
+                    id: "Complex pipeline: Match status, group by userId, sort by total, limit top 2.",
+                    en: "Complex pipeline: Match status, group by userId, sort by total, limit top 2."
+                },
+                instruction: {
+                    id: "Pipeline 4 stages: match delivered → group by userId sum total → sort by total -1 → limit 2",
+                    en: "Pipeline 4 stages: match delivered → group by userId sum total → sort by total -1 → limit 2"
+                },
+                hint: { id: "db.orders.aggregate([{ $match: { status: 'delivered' } }, { $group: { _id: '$userId', total: { $sum: '$total' } } }, { $sort: { total: -1 } }, { $limit: 2 }])", en: "db.orders.aggregate([{ $match: { status: 'delivered' } }, { $group: { _id: '$userId', total: { $sum: '$total' } } }, { $sort: { total: -1 } }, { $limit: 2 }])" },
+                explanation: { 
+                    id: "Real-world pipelines sering 4-10 stages. Each stage transforms output untuk next stage.",
+                    en: "Real-world pipelines often 4-10 stages. Each stage transforms output for next stage."
+                },
+                initialCode: "db.orders.aggregate([\n  { $match: { status: '...' } },\n  { $group: { _id: '$...', total: { $sum: '$...' } } },\n  { $sort: { total: ... } },\n  { $limit: ... }\n])",
+                expectedCheck: (res) => res.length <= 2
+            },
+            {
+                id: 79, world: 9, collection: "products",
+                title: { id: "Project After Group", en: "Project After Group" },
+                description: { 
+                    id: "Group lalu reshape dengan `$project`. Group by category, lalu rename _id to categoryName.",
+                    en: "Group then reshape with `$project`. Group by category, then rename _id to categoryName."
+                },
+                instruction: {
+                    id: "Pipeline: group by category count → project: categoryName: _id, productCount: count",
+                    en: "Pipeline: group by category count → project: categoryName: _id, productCount: count"
+                },
+                hint: { id: "db.products.aggregate([{ $group: { _id: '$category', count: { $sum: 1 } } }, { $project: { categoryName: '$_id', productCount: '$count' } }])", en: "db.products.aggregate([{ $group: { _id: '$category', count: { $sum: 1 } } }, { $project: { categoryName: '$_id', productCount: '$count' } }])" },
+                explanation: { 
+                    id: "Dalam `$project`, `$fieldName` reference field dari previous stage.",
+                    en: "In `$project`, `$fieldName` references field from previous stage."
+                },
+                initialCode: "db.products.aggregate([\n  { $group: { _id: '$...', count: { $sum: ... } } },\n  { $project: { categoryName: '$_id', productCount: '$count' } }\n])",
+                expectedCheck: (res) => res.length === 2 && res.every(g => g.categoryName && g.productCount)
+            },
+            {
+                id: 80, world: 9, collection: "users",
+                title: { id: "Match After Group", en: "Match After Group" },
+                description: { 
+                    id: "`$match` bisa di mana saja dalam pipeline. Group by role, lalu filter groups dengan avgAge > 26.",
+                    en: "`$match` can be anywhere in pipeline. Group by role, then filter groups with avgAge > 26."
+                },
+                instruction: {
+                    id: "Pipeline: group by role avgAge → match avgAge > 26",
+                    en: "Pipeline: group by role avgAge → match avgAge > 26"
+                },
+                hint: { id: "db.users.aggregate([{ $group: { _id: '$role', avgAge: { $avg: '$age' } } }, { $match: { avgAge: { $gt: 26 } } }])", en: "db.users.aggregate([{ $group: { _id: '$role', avgAge: { $avg: '$age' } } }, { $match: { avgAge: { $gt: 26 } } }])" },
+                explanation: { 
+                    id: "`$match` setelah `$group` = HAVING di SQL. Filter aggregated results.",
+                    en: "`$match` after `$group` = HAVING in SQL. Filters aggregated results."
+                },
+                initialCode: "db.users.aggregate([\n  { $group: { _id: '$...', avgAge: { $avg: '$...' } } },\n  { $match: { avgAge: { $gt: ... } } }\n])",
+                expectedCheck: (res) => res.length >= 1 && res.every(g => g.avgAge > 26)
+            },
+            {
+                id: 81, world: 9, collection: "blogs",
+                title: { id: "Top Blog by Views", en: "Top Blog by Views" },
+                description: { 
+                    id: "Comprehensive pipeline: Sort by views desc, limit 1, project title and views only.",
+                    en: "Comprehensive pipeline: Sort by views desc, limit 1, project title and views only."
+                },
+                instruction: {
+                    id: "Pipeline 3 stages: sort by views -1 → limit 1 → project title and views",
+                    en: "Pipeline 3 stages: sort by views -1 → limit 1 → project title and views"
+                },
+                hint: { id: "db.blogs.aggregate([{ $sort: { views: -1 } }, { $limit: 1 }, { $project: { title: 1, views: 1 } }])", en: "db.blogs.aggregate([{ $sort: { views: -1 } }, { $limit: 1 }, { $project: { title: 1, views: 1 } }])" },
+                explanation: { 
+                    id: "Aggregation pipeline = Swiss Army knife of NoSQL. Filtering, grouping, sorting, limiting - all in one query.",
+                    en: "Aggregation pipeline = Swiss Army knife of NoSQL. Filtering, grouping, sorting, limiting - all in one query."
+                },
+                initialCode: "db.blogs.aggregate([\n  { $sort: { views: ... } },\n  { $limit: ... },\n  { $project: { title: ..., views: ... } }\n])",
+                expectedCheck: (res) => res.length === 1 && res[0].title && res[0].views
+            },
+
+            // WORLD 10: THE ARCHITECT (Levels 82-90)
+            {
+                id: 82, world: 10, collection: "users",
+                title: { id: "Schema Design Intro", en: "Schema Design Intro" },
+                description: { 
+                    id: "**Schema Design**: embedding vs referencing. Lihat users - skills embedded dalam array.",
+                    en: "**Schema Design**: embedding vs referencing. View users - skills embedded in array."
+                },
+                instruction: {
+                    id: "Get all users untuk study embedded design: `db.users.find({})`",
+                    en: "Get all users to study embedded design: `db.users.find({})`"
+                },
+                hint: { id: "db.users.find({})", en: "db.users.find({})" },
+                explanation: { 
+                    id: "**Embedding**: nested data dalam satu document. Pro: fast reads. Con: data duplication possible.",
+                    en: "**Embedding**: nested data in single document. Pro: fast reads. Con: data duplication possible."
+                },
+                initialCode: "db.users.find({\n  \n})",
+                expectedCheck: (res) => res.length === 4 && res.every(u => Array.isArray(u.skills))
+            },
+            {
+                id: 83, world: 10, collection: "orders",
+                title: { id: "Referencing Pattern", en: "Referencing Pattern" },
+                description: { 
+                    id: "**Referencing**: orders punya userId, tidak embed entire user object.",
+                    en: "**Referencing**: orders have userId, not embedding entire user object."
+                },
+                instruction: {
+                    id: "Get orders to see reference pattern: `db.orders.find({})`",
+                    en: "Get orders to see reference pattern: `db.orders.find({})`"
+                },
+                hint: { id: "db.orders.find({})", en: "db.orders.find({})" },
+                explanation: { 
+                    id: "**Referencing**: store ID reference. Pro: no duplication, centralized updates. Con: need multiple queries.",
+                    en: "**Referencing**: store ID reference. Pro: no duplication, centralized updates. Con: need multiple queries."
+                },
+                initialCode: "db.orders.find({\n  \n})",
+                expectedCheck: (res) => res.length === 4 && res.every(o => o.userId)
+            },
+            {
+                id: 84, world: 10, collection: "blogs",
+                title: { id: "Embedded Array of Objects", en: "Embedded Array of Objects" },
+                description: { 
+                    id: "Comments embedded dalam blogs - array of objects. Good untuk 1-to-few relations.",
+                    en: "Comments embedded in blogs - array of objects. Good for 1-to-few relations."
+                },
+                instruction: {
+                    id: "Find blogs dengan minimal 2 comments: `db.blogs.find({ comments: { $size: 2 } })`",
+                    en: "Find blogs with at least 2 comments: `db.blogs.find({ comments: { $size: 2 } })`"
+                },
+                hint: { id: "db.blogs.find({ comments: { $size: 2 } })", en: "db.blogs.find({ comments: { $size: 2 } })" },
+                explanation: { 
+                    id: "**Embed when**: data doesn't grow unbounded, frequently accessed together, 1-to-few relationship.",
+                    en: "**Embed when**: data doesn't grow unbounded, frequently accessed together, 1-to-few relationship."
+                },
+                initialCode: "db.blogs.find({\n  comments: { $size: ... }\n})",
+                expectedCheck: (res) => res.length === 1
+            },
+            {
+                id: 85, world: 10, collection: "orders",
+                title: { id: "When to Reference", en: "When to Reference" },
+                description: { 
+                    id: "Orders reference userId dan productId. Kapan reference? Data sering berubah, many-to-many.",
+                    en: "Orders reference userId and productId. When to reference? Data changes often, many-to-many."
+                },
+                instruction: {
+                    id: "Find orders by specific user: `db.orders.find({ userId: 1 })`",
+                    en: "Find orders by specific user: `db.orders.find({ userId: 1 })`"
+                },
+                hint: { id: "db.orders.find({ userId: 1 })", en: "db.orders.find({ userId: 1 })" },
+                explanation: { 
+                    id: "**Reference when**: data grows unbounded, many-to-many, data updated independently, large documents.",
+                    en: "**Reference when**: data grows unbounded, many-to-many, data updated independently, large documents."
+                },
+                initialCode: "db.orders.find({\n  userId: ...\n})",
+                expectedCheck: (res) => res.length === 2 && res.every(o => o.userId === 1)
+            },
+            {
+                id: 86, world: 10, collection: "users",
+                title: { id: "One-to-Few: Embed", en: "One-to-Few: Embed" },
+                description: { 
+                    id: "**One-to-Few**: User has few skills (2-5). Embedded array optimal.",
+                    en: "**One-to-Few**: User has few skills (2-5). Embedded array is optimal."
+                },
+                instruction: {
+                    id: "Count users by number of skills using aggregation: group by skills array length",
+                    en: "Count users by number of skills using aggregation: group by skills array length"
+                },
+                hint: { id: "db.users.find({})", en: "db.users.find({})" },
+                explanation: { 
+                    id: "One-to-Few: embed karena bounded, query efficient, atomic updates.",
+                    en: "One-to-Few: embed because bounded, query efficient, atomic updates."
+                },
+                initialCode: "db.users.find({\n  \n})",
+                expectedCheck: (res) => res.length === 4
+            },
+            {
+                id: 87, world: 10, collection: "orders",
+                title: { id: "One-to-Many: Reference", en: "One-to-Many: Reference" },
+                description: { 
+                    id: "**One-to-Many**: User has many orders (unbounded). Reference with userId.",
+                    en: "**One-to-Many**: User has many orders (unbounded). Reference with userId."
+                },
+                instruction: {
+                    id: "Aggregate: count orders per user using group",
+                    en: "Aggregate: count orders per user using group"
+                },
+                hint: { id: "db.orders.aggregate([{ $group: { _id: '$userId', orderCount: { $sum: 1 } } }])", en: "db.orders.aggregate([{ $group: { _id: '$userId', orderCount: { $sum: 1 } } }])" },
+                explanation: { 
+                    id: "One-to-Many: reference karena unbounded growth, separate lifecycle.",
+                    en: "One-to-Many: reference because unbounded growth, separate lifecycle."
+                },
+                initialCode: "db.orders.aggregate([\n  {\n    $group: {\n      _id: '$...',\n      orderCount: { $sum: ... }\n    }\n  }\n])",
+                expectedCheck: (res) => res.length >= 2 && res.every(g => g.orderCount > 0)
+            },
+            {
+                id: 88, world: 10, collection: "blogs",
+                title: { id: "Two-Way Referencing", en: "Two-Way Referencing" },
+                description: { 
+                    id: "Conceptual: blogs reference author, authors could reference blogIds. Two-way for bi-directional queries.",
+                    en: "Conceptual: blogs reference author, authors could reference blogIds. Two-way for bi-directional queries."
+                },
+                instruction: {
+                    id: "Find blogs by author 'Budi': `db.blogs.find({ author: 'Budi' })`",
+                    en: "Find blogs by author 'Budi': `db.blogs.find({ author: 'Budi' })`"
+                },
+                hint: { id: "db.blogs.find({ author: 'Budi' })", en: "db.blogs.find({ author: 'Budi' })" },
+                explanation: { 
+                    id: "Two-way referencing: kadang store reference di both sides untuk query flexibility. Trade-off: harder updates.",
+                    en: "Two-way referencing: sometimes store reference on both sides for query flexibility. Trade-off: harder updates."
+                },
+                initialCode: "db.blogs.find({\n  author: '...'\n})",
+                expectedCheck: (res) => res.length === 1 && res[0].author === 'Budi'
+            },
+            {
+                id: 89, world: 10, collection: "products",
+                title: { id: "Schema Anti-Patterns", en: "Schema Anti-Patterns" },
+                description: { 
+                    id: "**Anti-pattern**: massive arrays (>1000 items), deep nesting (>3 levels), duplicate data everywhere.",
+                    en: "**Anti-pattern**: massive arrays (>1000 items), deep nesting (>3 levels), duplicate data everywhere."
+                },
+                instruction: {
+                    id: "Query products to see good schema: bounded tags array, flat structure",
+                    en: "Query products to see good schema: bounded tags array, flat structure"
+                },
+                hint: { id: "db.products.find({})", en: "db.products.find({})" },
+                explanation: { 
+                    id: "Keep arrays bounded (<100 items), limit nesting (2-3 levels), denormalize only frequently accessed data.",
+                    en: "Keep arrays bounded (<100 items), limit nesting (2-3 levels), denormalize only frequently accessed data."
+                },
+                initialCode: "db.products.find({\n  \n})",
+                expectedCheck: (res) => res.length >= 4
+            },
+            {
+                id: 90, world: 10, collection: "users",
+                title: { id: "Design Decision Quiz", en: "Design Decision Quiz" },
+                description: { 
+                    id: "**Final Challenge**: You've learned CRUD, operators, arrays, updates, aggregation, and schema design. Retrieve all users to complete your journey!",
+                    en: "**Final Challenge**: You've learned CRUD, operators, arrays, updates, aggregation, and schema design. Retrieve all users to complete your journey!"
+                },
+                instruction: {
+                    id: "Selesaikan dengan query sederhana: `db.users.find({})` - The journey is complete!",
+                    en: "Complete with simple query: `db.users.find({})` - The journey is complete!"
+                },
+                hint: { id: "db.users.find({})", en: "db.users.find({})" },
+                explanation: { 
+                    id: "**Congratulations!** Kamu telah menguasai fundamental NoSQL: dari basic queries hingga complex aggregations dan schema design. Keep practicing!",
+                    en: "**Congratulations!** You've mastered NoSQL fundamentals: from basic queries to complex aggregations and schema design. Keep practicing!"
+                },
+                initialCode: "db.users.find({\n  \n})",
+                expectedCheck: (res) => res.length === 4
             }
         ];
 
-        // --- MINI MONGO ENGINE (Simulation) ---
-        const MiniMongo = {
-            users: {
-                data: [],
-                find: function(query) {
-                    if (!query || Object.keys(query).length === 0) return [...this.data];
-                    
-                    return this.data.filter(item => {
-                        // Simple equality match simulation
-                        for (let key in query) {
-                            if (item[key] !== query[key]) return false;
-                        }
-                        return true;
-                    });
-                },
-                insertOne: function(doc) {
-                    const newDoc = { _id: this.data.length + 1, ...doc };
-                    this.data.push(newDoc);
-                    return { acknowledged: true, insertedId: newDoc._id };
-                }
-            }
+        // World names for display
+        const worldNames = {
+            1: { id: "WORLD 1: OBJECT", en: "WORLD 1: OBJECT" },
+            2: { id: "WORLD 2: NAVIGATOR", en: "WORLD 2: NAVIGATOR" },
+            3: { id: "WORLD 3: OPERATOR", en: "WORLD 3: OPERATOR" },
+            4: { id: "WORLD 4: ARRAY MASTER", en: "WORLD 4: ARRAY MASTER" },
+            5: { id: "WORLD 5: MODIFIER I", en: "WORLD 5: MODIFIER I" },
+            6: { id: "WORLD 6: MODIFIER II", en: "WORLD 6: MODIFIER II" },
+            7: { id: "WORLD 7: AGGREGATOR I", en: "WORLD 7: AGGREGATOR I" },
+            8: { id: "WORLD 8: AGGREGATOR II", en: "WORLD 8: AGGREGATOR II" },
+            9: { id: "WORLD 9: AGGREGATOR III", en: "WORLD 9: AGGREGATOR III" },
+            10: { id: "WORLD 10: ARCHITECT", en: "WORLD 10: ARCHITECT" }
         };
 
-        // --- CORE FUNCTIONS ---
-        
+        // Initialize
         window.onload = () => {
             resetDB();
             loadLevel(0);
@@ -361,24 +2412,31 @@
         };
 
         function resetDB() {
-            // Deep copy initial data
-            MiniMongo.users.data = JSON.parse(JSON.stringify(initialData));
+            for (let collection in datasets) {
+                MiniMongo.createCollection(collection, datasets[collection]);
+            }
             updateSourceDisplay();
         }
 
         function updateSourceDisplay() {
+            const lvl = levels[currentLevelIndex];
+            const collection = lvl.collection;
             const el = document.getElementById('sourceDisplay');
-            el.textContent = JSON.stringify(MiniMongo.users.data, null, 2);
+            const collNameEl = document.getElementById('collectionName');
+            
+            collNameEl.textContent = collection;
+            el.textContent = JSON.stringify(MiniMongo[collection].data, null, 2);
             hljs.highlightElement(el);
         }
 
         function loadLevel(idx) {
             currentLevelIndex = idx;
-            resetDB(); // Reset DB each level for consistency
+            resetDB();
             
             const lvl = levels[idx];
             
             document.getElementById('currentLevelDisplay').innerText = idx + 1;
+            document.getElementById('worldDisplay').innerText = worldNames[lvl.world][lang];
             document.getElementById('levelTitle').innerText = lvl.title[lang];
             document.getElementById('levelDesc').innerHTML = markedToHtml(lvl.description[lang]);
             document.getElementById('levelInstruction').innerHTML = markedToHtml(lvl.instruction[lang]);
@@ -386,51 +2444,51 @@
             document.getElementById('explanationText').innerText = lvl.explanation[lang];
             document.getElementById('codeEditor').value = lvl.initialCode;
 
-            // UI Reset
-            ['hintBox','errorBox','successBox','explanationBox'].forEach(id => document.getElementById(id).classList.add('hidden'));
+            ['hintBox','errorBox','successBox','explanationBox'].forEach(id => 
+                document.getElementById(id).classList.add('hidden'));
             
-            // Bilingual Result Placeholder
-            const resultPlaceholder = lang === 'id' ? "// Hasil query akan muncul di sini..." : "// Result will appear here...";
+            const resultPlaceholder = lang === 'id' ? 
+                "// Hasil query akan muncul di sini..." : 
+                "// Result will appear here...";
             document.getElementById('resultDisplay').textContent = resultPlaceholder;
+            
+            updateSourceDisplay();
         }
 
         function runCode() {
             const userCode = document.getElementById('codeEditor').value;
             
-            // UI Reset
             document.getElementById('errorBox').classList.add('hidden');
             document.getElementById('successBox').classList.add('hidden');
             document.getElementById('explanationBox').classList.add('hidden');
 
             if (userCode.includes('...')) {
-                showError(lang === 'id' ? "Ganti tanda '...' dengan kode yang benar." : "Replace '...' with correct code.");
+                showError(lang === 'id' ? 
+                    "Ganti tanda '...' dengan kode yang benar." : 
+                    "Replace '...' with correct code.");
                 return;
             }
 
             try {
-                // SANDBOX EVALUATION
-                // We create a safe-ish scope where 'db' is our MiniMongo object
                 const runFunc = new Function('db', `return ${userCode}`);
                 const result = runFunc(MiniMongo);
 
-                // Display Result
                 const resEl = document.getElementById('resultDisplay');
                 resEl.textContent = JSON.stringify(result, null, 2);
                 hljs.highlightElement(resEl);
                 
-                // Update Source DB Visualization (in case of insert/update)
                 updateSourceDisplay();
 
-                // Validation
                 const lvl = levels[currentLevelIndex];
-                // Check against result OR full DB state (for inserts/updates)
-                const isPassed = lvl.expectedCheck(result, MiniMongo.users.data);
+                const isPassed = lvl.expectedCheck(result, MiniMongo);
 
                 if (isPassed) {
                     document.getElementById('successBox').classList.remove('hidden');
                     document.getElementById('explanationBox').classList.remove('hidden');
                 } else {
-                    showError(lang === 'id' ? "Hasil tidak sesuai target." : "Result does not match target.");
+                    showError(lang === 'id' ? 
+                        "Hasil tidak sesuai target. Cek kembali query-mu!" : 
+                        "Result does not match target. Check your query!");
                 }
 
             } catch (e) {
@@ -438,7 +2496,6 @@
             }
         }
 
-        // --- HELPER UI ---
         function showError(msg) {
             document.getElementById('errorMsg').innerText = msg;
             document.getElementById('errorBox').classList.remove('hidden');
@@ -463,21 +2520,52 @@
             if (currentLevelIndex < levels.length - 1) {
                 loadLevel(currentLevelIndex + 1);
             } else {
-                alert("Demo Finished! Wait for the full version.");
+                showCongratulations();
             }
+        }
+
+        function showCongratulations() {
+            document.getElementById('congratsModal').classList.remove('hidden');
+            createConfetti();
+        }
+
+        function createConfetti() {
+            const colors = ['#4ade80', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 100);
+            }
+        }
+
+        function restartAcademy() {
+            document.getElementById('congratsModal').classList.add('hidden');
+            loadLevel(0);
         }
 
         function updateUIText() {
             const dict = {
                 mission: { id: "Misi Kamu", en: "Your Mission" },
-                "hint-btn": { id: "Bantuan", en: "Hint" }, // Fixed Key to match HTML class
+                "hint-btn": { id: "Bantuan", en: "Hint" },
                 run: { id: "Jalankan", en: "Run" },
                 failed: { id: "Gagal", en: "Failed" },
                 awesome: { id: "Berhasil!", en: "Awesome!" },
-                "success-msg": { id: "Data sesuai target.", en: "Data matches target." }, // Fixed Key to match HTML class
+                "success-msg": { id: "Data sesuai target.", en: "Data matches target." },
                 next: { id: "Lanjut", en: "Next" },
                 result: { id: "Hasil Query:", en: "Query Result:" },
-                why: { id: "Konsep NoSQL", en: "NoSQL Concept" }
+                why: { id: "Konsep NoSQL", en: "NoSQL Concept" },
+                "congrats-title": { id: "SELAMAT!", en: "CONGRATULATIONS!" },
+                "congrats-subtitle": { id: "Kamu telah menyelesaikan semua 90 level!", en: "You've completed all 90 levels!" },
+                "congrats-msg": { id: "Kamu sekarang telah menguasai dasar-dasar NoSQL dari CRUD sederhana hingga Aggregation Pipeline dan Schema Design. Ini adalah pencapaian luar biasa!", en: "You've now mastered NoSQL fundamentals from simple CRUD to Aggregation Pipeline and Schema Design. This is an incredible achievement!" },
+                "congrats-levels": { id: "Level Selesai", en: "Levels Completed" },
+                "congrats-worlds": { id: "World Ditaklukkan", en: "Worlds Conquered" },
+                "congrats-restart": { id: "Mulai Dari Awal", en: "Start From Beginning" }
             };
             Object.keys(dict).forEach(k => {
                 const el = document.querySelector('.lang-'+k);
@@ -486,13 +2574,22 @@
         }
 
         function toggleLevelMenu() {
-            const m = document.getElementById('levelMenu'); m.classList.toggle('hidden');
+            const m = document.getElementById('levelMenu');
+            m.classList.toggle('hidden');
             if(!m.classList.contains('hidden')) {
-                m.innerHTML = levels.map((l,i) => `
-                    <button onclick="loadLevel(${i})" class="w-full text-left px-4 py-2 text-xs hover:bg-slate-700 text-slate-300 border-b border-slate-700">
-                        ${i+1}. ${l.title[lang]}
-                    </button>
-                `).join('');
+                let currentWorld = 0;
+                m.innerHTML = levels.map((l,i) => {
+                    let worldHeader = '';
+                    if (l.world !== currentWorld) {
+                        currentWorld = l.world;
+                        worldHeader = `<div class="px-4 py-2 bg-slate-700 text-green-400 font-bold text-xs border-b border-slate-600">${worldNames[currentWorld][lang]}</div>`;
+                    }
+                    return worldHeader + `
+                        <button onclick="loadLevel(${i})" class="w-full text-left px-4 py-2 text-xs hover:bg-slate-700 text-slate-300 border-b border-slate-700">
+                            ${i+1}. ${l.title[lang]}
+                        </button>
+                    `;
+                }).join('');
             }
         }
 
