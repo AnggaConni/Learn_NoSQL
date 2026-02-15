@@ -575,13 +575,113 @@
             }
         };
 
-        // Initial datasets
+        // Initial datasets - Progressive complexity
+        const getDatasetForWorld = (world) => {
+            // World 1: Very simple data
+            if (world === 1) {
+                return {
+                    users: [
+                        { _id: 1, name: "Budi", role: "admin", age: 28, skills: ["js", "sql"] },
+                        { _id: 2, name: "Siti", role: "user", age: 22, skills: ["design"] },
+                        { _id: 3, name: "Joko", role: "user", age: 30, skills: ["python", "sql"] },
+                        { _id: 4, name: "Rina", role: "admin", age: 25, skills: ["js"] }
+                    ],
+                    products: [
+                        { _id: 1, name: "Laptop", price: 1000, stock: 15, category: "electronics", tags: ["tech", "computer"] },
+                        { _id: 2, name: "Mouse", price: 25, stock: 50, category: "electronics", tags: ["tech", "accessory"] },
+                        { _id: 3, name: "Desk", price: 200, stock: 10, category: "furniture", tags: ["office"] },
+                        { _id: 4, name: "Chair", price: 150, stock: 20, category: "furniture", tags: ["office", "comfort"] }
+                    ],
+                    orders: [
+                        { _id: 1, userId: 1, productId: 1, quantity: 2, total: 2000, status: "shipped", date: "2024-01-15" },
+                        { _id: 2, userId: 2, productId: 2, quantity: 3, total: 75, status: "delivered", date: "2024-01-20" },
+                        { _id: 3, userId: 1, productId: 3, quantity: 1, total: 200, status: "pending", date: "2024-02-01" },
+                        { _id: 4, userId: 3, productId: 1, quantity: 1, total: 1000, status: "shipped", date: "2024-02-05" }
+                    ],
+                    blogs: [
+                        { _id: 1, title: "NoSQL Basics", author: "Budi", views: 150, tags: ["database", "tutorial"], comments: [
+                            { user: "Siti", text: "Great post!" },
+                            { user: "Joko", text: "Very helpful" }
+                        ]},
+                        { _id: 2, title: "JavaScript Tips", author: "Rina", views: 200, tags: ["javascript", "coding"], comments: [
+                            { user: "Budi", text: "Thanks!" }
+                        ]},
+                        { _id: 3, title: "Design Patterns", author: "Siti", views: 180, tags: ["design", "architecture"], comments: [] }
+                    ]
+                };
+            }
+            // World 2: Add city field
+            if (world === 2) {
+                return {
+                    users: [
+                        { _id: 1, name: "Budi", role: "admin", age: 28, city: "Jakarta", skills: ["js", "sql"] },
+                        { _id: 2, name: "Siti", role: "user", age: 22, city: "Bandung", skills: ["design"] },
+                        { _id: 3, name: "Joko", role: "user", age: 30, city: "Jakarta", skills: ["python", "sql"] },
+                        { _id: 4, name: "Rina", role: "admin", age: 25, city: "Surabaya", skills: ["js"] }
+                    ],
+                    products: [
+                        { _id: 1, name: "Laptop", price: 1000, stock: 15, category: "electronics", tags: ["tech", "computer"] },
+                        { _id: 2, name: "Mouse", price: 25, stock: 50, category: "electronics", tags: ["tech", "accessory"] },
+                        { _id: 3, name: "Desk", price: 200, stock: 10, category: "furniture", tags: ["office"] },
+                        { _id: 4, name: "Chair", price: 150, stock: 20, category: "furniture", tags: ["office", "comfort"] }
+                    ],
+                    orders: [
+                        { _id: 1, userId: 1, productId: 1, quantity: 2, total: 2000, status: "shipped", date: "2024-01-15" },
+                        { _id: 2, userId: 2, productId: 2, quantity: 3, total: 75, status: "delivered", date: "2024-01-20" },
+                        { _id: 3, userId: 1, productId: 3, quantity: 1, total: 200, status: "pending", date: "2024-02-01" },
+                        { _id: 4, userId: 3, productId: 1, quantity: 1, total: 1000, status: "shipped", date: "2024-02-05" }
+                    ],
+                    blogs: [
+                        { _id: 1, title: "NoSQL Basics", author: "Budi", views: 150, tags: ["database", "tutorial"], comments: [
+                            { user: "Siti", text: "Great post!" },
+                            { user: "Joko", text: "Very helpful" }
+                        ]},
+                        { _id: 2, title: "JavaScript Tips", author: "Rina", views: 200, tags: ["javascript", "coding"], comments: [
+                            { user: "Budi", text: "Thanks!" }
+                        ]},
+                        { _id: 3, title: "Design Patterns", author: "Siti", views: 180, tags: ["design", "architecture"], comments: [] }
+                    ]
+                };
+            }
+            // World 3+: Add salary field too
+            return {
+                users: [
+                    { _id: 1, name: "Budi", role: "admin", age: 28, city: "Jakarta", skills: ["js", "sql"], salary: 8000 },
+                    { _id: 2, name: "Siti", role: "user", age: 22, city: "Bandung", skills: ["design"], salary: 5000 },
+                    { _id: 3, name: "Joko", role: "user", age: 30, city: "Jakarta", skills: ["python", "sql"], salary: 7000 },
+                    { _id: 4, name: "Rina", role: "admin", age: 25, city: "Surabaya", skills: ["js"], salary: 7500 }
+                ],
+                products: [
+                    { _id: 1, name: "Laptop", price: 1000, stock: 15, category: "electronics", tags: ["tech", "computer"] },
+                    { _id: 2, name: "Mouse", price: 25, stock: 50, category: "electronics", tags: ["tech", "accessory"] },
+                    { _id: 3, name: "Desk", price: 200, stock: 10, category: "furniture", tags: ["office"] },
+                    { _id: 4, name: "Chair", price: 150, stock: 20, category: "furniture", tags: ["office", "comfort"] }
+                ],
+                orders: [
+                    { _id: 1, userId: 1, productId: 1, quantity: 2, total: 2000, status: "shipped", date: "2024-01-15" },
+                    { _id: 2, userId: 2, productId: 2, quantity: 3, total: 75, status: "delivered", date: "2024-01-20" },
+                    { _id: 3, userId: 1, productId: 3, quantity: 1, total: 200, status: "pending", date: "2024-02-01" },
+                    { _id: 4, userId: 3, productId: 1, quantity: 1, total: 1000, status: "shipped", date: "2024-02-05" }
+                ],
+                blogs: [
+                    { _id: 1, title: "NoSQL Basics", author: "Budi", views: 150, tags: ["database", "tutorial"], comments: [
+                        { user: "Siti", text: "Great post!" },
+                        { user: "Joko", text: "Very helpful" }
+                    ]},
+                    { _id: 2, title: "JavaScript Tips", author: "Rina", views: 200, tags: ["javascript", "coding"], comments: [
+                        { user: "Budi", text: "Thanks!" }
+                    ]},
+                    { _id: 3, title: "Design Patterns", author: "Siti", views: 180, tags: ["design", "architecture"], comments: [] }
+                ]
+            };
+        };
+
         const datasets = {
             users: [
-                { _id: 1, name: "Budi", role: "admin", age: 28, city: "Jakarta", skills: ["js", "sql"], salary: 8000 },
-                { _id: 2, name: "Siti", role: "user", age: 22, city: "Bandung", skills: ["design"], salary: 5000 },
-                { _id: 3, name: "Joko", role: "user", age: 30, city: "Jakarta", skills: ["python", "sql"], salary: 7000 },
-                { _id: 4, name: "Rina", role: "admin", age: 25, city: "Surabaya", skills: ["js"], salary: 7500 }
+                { _id: 1, name: "Budi", role: "admin", age: 28, skills: ["js", "sql"] },
+                { _id: 2, name: "Siti", role: "user", age: 22, skills: ["design"] },
+                { _id: 3, name: "Joko", role: "user", age: 30, skills: ["python", "sql"] },
+                { _id: 4, name: "Rina", role: "admin", age: 25, skills: ["js"] }
             ],
             products: [
                 { _id: 1, name: "Laptop", price: 1000, stock: 15, category: "electronics", tags: ["tech", "computer"] },
@@ -652,12 +752,12 @@
                 id: 3, world: 1, collection: "users",
                 title: { id: "Insert Data", en: "Insert Data" },
                 description: { 
-                    id: "Ada user baru! Tambahkan data ke collection users.",
-                    en: "New user incoming! Add data to the users collection."
+                    id: "Ada user baru bernama **Dewi**! Tambahkan data ke collection users.",
+                    en: "There's a new user named **Dewi**! Add data to the users collection."
                 },
                 instruction: {
-                    id: "Gunakan `db.users.insertOne()` dengan data: `{ name: 'Dewi', role: 'user', age: 24 }`",
-                    en: "Use `db.users.insertOne()` with data: `{ name: 'Dewi', role: 'user', age: 24 }`"
+                    id: "Gunakan `insertOne` untuk menambah user baru: `{ name: 'Dewi', role: 'user', age: 24 }`. **Catatan**: Budi sudah ada di database, jadi kita tambahkan Dewi.",
+                    en: "Use `insertOne` to add new user: `{ name: 'Dewi', role: 'user', age: 24 }`. **Note**: Budi already exists, so we're adding Dewi."
                 },
                 hint: { id: "db.users.insertOne({ name: 'Dewi', role: 'user', age: 24 })", en: "db.users.insertOne({ name: 'Dewi', role: 'user', age: 24 })" },
                 explanation: { 
@@ -665,7 +765,7 @@
                     en: "NoSQL doesn't require strict schemas. You can add fields that don't exist in other documents!"
                 },
                 initialCode: "db.users.insertOne({\n  name: '...',\n  role: '...',\n  age: ...\n})",
-                expectedCheck: (res, fullDb) => fullDb.length === 5 && fullDb.users.data.find(u => u.name === 'Dewi')
+                expectedCheck: (res, fullDb) => fullDb.users.data.length === 5 && fullDb.users.data.find(u => u.name === 'Dewi')
             },
             {
                 id: 4, world: 1, collection: "users",
@@ -785,19 +885,19 @@
             // WORLD 2: THE NAVIGATOR (Levels 10-18)
             {
                 id: 10, world: 2, collection: "users",
-                title: { id: "Nested Fields", en: "Nested Fields" },
+                title: { id: "Field Baru: City", en: "New Field: City" },
                 description: { 
-                    id: "Dokumen bisa punya **nested objects**. Lihat users dengan field `address.city`.",
-                    en: "Documents can have **nested objects**. View users with `address.city` field."
+                    id: "Dataset diperluas! Sekarang users punya field **city**. Mari filter berdasarkan kota.",
+                    en: "Dataset expanded! Now users have a **city** field. Let's filter by city."
                 },
                 instruction: {
-                    id: "Dataset diperluas. Gunakan `db.users.find({ city: 'Jakarta' })` untuk filter by kota.",
-                    en: "Dataset expanded. Use `db.users.find({ city: 'Jakarta' })` to filter by city."
+                    id: "Cari users yang tinggal di Jakarta: `db.users.find({ city: 'Jakarta' })`",
+                    en: "Find users who live in Jakarta: `db.users.find({ city: 'Jakarta' })`"
                 },
                 hint: { id: "db.users.find({ city: 'Jakarta' })", en: "db.users.find({ city: 'Jakarta' })" },
                 explanation: { 
-                    id: "Untuk nested field gunakan dot notation: `'address.city'` atau langsung jika flat.",
-                    en: "For nested fields use dot notation: `'address.city'` or directly if flat."
+                    id: "NoSQL schema-less: kamu bisa add fields baru kapan saja. Field baru akan muncul di beberapa dokumen.",
+                    en: "NoSQL is schema-less: you can add new fields anytime. New fields will appear in some documents."
                 },
                 initialCode: "db.users.find({\n  city: '...'\n})",
                 expectedCheck: (res) => res.length === 2 && res.every(u => u.city === 'Jakarta')
@@ -2412,8 +2512,11 @@
         };
 
         function resetDB() {
-            for (let collection in datasets) {
-                MiniMongo.createCollection(collection, datasets[collection]);
+            const lvl = levels[currentLevelIndex];
+            const worldData = getDatasetForWorld(lvl.world);
+            
+            for (let collection in worldData) {
+                MiniMongo.createCollection(collection, worldData[collection]);
             }
             updateSourceDisplay();
         }
